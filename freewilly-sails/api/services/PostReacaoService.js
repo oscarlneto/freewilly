@@ -6,7 +6,7 @@ module.exports = {
 						+request.idPost+", "+PostReacao.setMarks(request.usuario)+", "
 						+request.reacao+", "+request.compartilhou+");";
 
-		PostReacao.query(query, function (error, results) {
+		PostReacao.query(query, function (error, result) {
 
 			if(error) {
 				result.sucesso = false;
@@ -25,7 +25,7 @@ module.exports = {
 		var query = "UPDATE PostReacao SET reacao = "+request.reacao+", compartilhou = "+request.compartilhou+" "
 						+"WHERE idPost = "+request.idPost+" AND usuario = "+PostReacao.setMarks(request.usuario)+";";
 
-		PostReacao.query(query, function (error, results) {
+		PostReacao.query(query, function (error, result) {
 
 			if(error) {
 				result.sucesso = false;
@@ -44,7 +44,7 @@ module.exports = {
 		var query = "DELETE FROM PostReacao WHERE idPost = "+request.idPost
 						+" AND usuario = "+PostReacao.setMarks(request.usuario)+";";
 
-		PostReacao.query(query, function (error, results) {
+		PostReacao.query(query, function (error, result) {
 
 			if(error) {
 				result.sucesso = false;
@@ -63,7 +63,7 @@ module.exports = {
 		var query = "SELECT * FROM PostReacao WHERE idPost = "+request.idPost
 			+" AND usuario = "+PostReacao.setMarks(request.usuario)+";";
 
-		PostReacao.query(query, function (error, results) {
+		PostReacao.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
 				result.sucesso = false;

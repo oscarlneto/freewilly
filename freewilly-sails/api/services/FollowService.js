@@ -5,7 +5,7 @@ module.exports = {
 		var query = "INSERT INTO Follow (usuario, follow) VALUES ("+Follow.setMarks(request.usuario)+", "
 						+Follow.setMarks(request.follow)+");";
 
-		Follow.query(query, function (error, results) {
+		Follow.query(query, function (error, result) {
 
 			if(error) {
 				result.sucesso = false;
@@ -23,14 +23,14 @@ module.exports = {
 
 		var query = "UPDATE Follow SET ";
 
-		Follow.query(query, function (error, results) {
+		Follow.query(query, function (error, result) {
 
 			if(error)
 				sails.log.debug(error);
 				return response({sucesso: false});
 
 			else 
-				return response(results);
+				return response(result);
 		});
 	},*/
 
@@ -39,7 +39,7 @@ module.exports = {
 		var query = "DELETE FROM Follow WHERE usuario = "+Follow.setMarks(request.usuario)
 						+" AND follow = "+Follow.setMarks(request.follow)+";";
 
-		Follow.query(query, function (error, results) {
+		Follow.query(query, function (error, result) {
 
 			if(error) {
 				result.sucesso = false;
@@ -57,7 +57,7 @@ module.exports = {
 
 		var query = "SELECT * FROM Follow WHERE usuario = "+Follow.setMarks(request.usuario)+";";
 
-		Follow.query(query, function (error, results) {
+		Follow.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
 				result.sucesso = false;

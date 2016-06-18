@@ -7,12 +7,20 @@
 
 module.exports = {
 
+/* Metodo create:
+ *
+ * Parametros:
+ *
+ * Retorno:
+ *
+ */
 	create: function (request, response) {
 
 		var post = {};
 		post.usuario = Post.setUndefined(request.param('usuario'));
 		post.titulo = Post.setUndefined(request.param('titulo'));
 		post.conteudo = Post.setUndefined(request.param('conteudo'));
+		post.idGrupo = Post.setUndefined(request.param('idGrupo'));
 		
 		PostService.insert(post, function (result) {
 			response.json(result);
@@ -26,6 +34,7 @@ module.exports = {
 		post.usuario = Post.setUndefined(request.param('usuario'));
 		post.titulo = Post.setUndefined(request.param('titulo'));
 		post.conteudo = Post.setUndefined(request.param('conteudo'));
+		post.idGrupo = Post.setUndefined(request.param('idGrupo'));
 
 		PostService.update(post, function (result) {
 			response.json(result);
@@ -58,6 +67,16 @@ module.exports = {
 		post.usuario = Post.setUndefined(request.param('usuario'));
 
 		PostService.selectByUsuario(post, function (result) {
+			response.json(result);
+		});
+	},
+
+	getByGrupo: function (request, response) {
+
+		var post = {};
+		post.idGrupo = Post.setUndefined(request.param('idGrupo'));
+
+		PostService.selectByGrupo(post, function (result) {
 			response.json(result);
 		});
 	}

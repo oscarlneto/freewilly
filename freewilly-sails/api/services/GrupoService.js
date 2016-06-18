@@ -6,7 +6,7 @@ module.exports = {
 						+Grupo.setMarks(request.usuario)+", "+Grupo.setMarks(request.nome)+", "
 						+Grupo.setMarks(request.foto)+", "+Grupo.setMarks(request.descricao)+");";
 
-		Grupo.query(query, function (error, results) {
+		Grupo.query(query, function (error, result) {
 
 			if(error) {
 				result.sucesso = false;
@@ -26,7 +26,7 @@ module.exports = {
 						+"foto = "+Grupo.setMarks(request.foto)+", descricao = "+Grupo.setMarks(request.descricao)
 						+" WHERE idGrupo = "+request.idGrupo+";";
 
-		Grupo.query(query, function (error, results) {
+		Grupo.query(query, function (error, result) {
 
 			if(error) {
 				result.sucesso = false;
@@ -44,7 +44,7 @@ module.exports = {
 
 		var query = "DELETE FROM Grupo WHERE idGrupo = "+request.idGrupo+";";
 
-		Grupo.query(query, function (error, results) {
+		Grupo.query(query, function (error, result) {
 
 			if(error) {
 				result.sucesso = false;
@@ -62,7 +62,7 @@ module.exports = {
 
 		var query = "SELECT * FROM Grupo WHERE idGrupo = "+request.idGrupo+";";
 
-		Grupo.query(query, function (error, results) {
+		Grupo.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
 				result.sucesso = false;
@@ -80,7 +80,7 @@ module.exports = {
 
 		var query = "SELECT * FROM Grupo WHERE usuario = "+Grupo.setMarks(request.usuario)+";";
 
-		Grupo.query(query, function (error, results) {
+		Grupo.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
 				result.sucesso = false;

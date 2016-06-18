@@ -32,8 +32,6 @@ module.exports = {
 		usuario.foto = Usuario.setUndefined(request.param('foto'));
 		usuario.descricao = Usuario.setUndefined(request.param('descricao'));
 
-		console.log(usuario);
-
 		UsuarioService.update(usuario, function (result) {
 			response.json(result);
 		});

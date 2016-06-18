@@ -5,9 +5,17 @@ DROP TABLE GrupoUsuarios CASCADE;
 DROP TABLE Follow CASCADE;
 DROP TABLE PostReacao CASCADE;
 
+/* 
+ * Tabela Secao: contem informacoes sobre as secoes de cada zona eleitoral.
+ *	@nroZona (Chave primaria e estrangeira): referencia o atributo de mesmo nome na tabela Zona;
+ *	@estadoZona (Chave primaria e estrangeira): referencia o atributo estadoZona da tabela Zona;
+ *	@nroSecao (Chave primaria): numero da secao eleitoral dentro de uma zona;
+ *	@localSecao: descricao da localizacao da secao;
+ *	@qtdEleitoresS (Atributo derivado): indica o numero de eleitores que votam na secao. 
+ */
 CREATE TABLE Usuario (
 	usuario VARCHAR(10) NOT NULL,
-	senha VARCHAR(10) NOT NULL,
+	senha VARCHAR(10) NOT NULL,	
 	nome VARCHAR(30) NOT NULL,
 	aniversario DATE,
 	foto VARCHAR(50),
@@ -29,8 +37,10 @@ CREATE TABLE Post (
 	titulo VARCHAR(30) NOT NULL,
 	conteudo VARCHAR(300) NOT NULL,
 	data TIMESTAMP DEFAULT CURRENT_TIMESTAMP(2),
+	idGrupo INTEGER,
 	CONSTRAINT PKpost PRIMARY KEY (idPost),
-	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE
+	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE,
+	CONSTRAINT FKgrupo FOREIGN KEY (idGrupo) REFERENCES Grupo (idGrupo) ON DELETE CASCADE
 );
 
 CREATE TABLE PostReacao (

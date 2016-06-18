@@ -25,6 +25,10 @@ module.exports = {
 
 		data : {
 			type: 'date'
+		},
+
+		idGrupo : {
+			type: 'integer'
 		}
 	},
 

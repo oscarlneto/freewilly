@@ -5,7 +5,7 @@ module.exports = {
 		var query = "INSERT INTO GrupoUsuarios (idGrupo, usuario) VALUES ("+request.idGrupo+", "
 						+GrupoUsuarios.setMarks(request.usuario)+");";
 
-		GrupoUsuarios.query(query, function (error, results) {
+		GrupoUsuarios.query(query, function (error, result) {
 
 			if(error) {
 				result.sucesso = false;
@@ -23,14 +23,14 @@ module.exports = {
 
 		var query = "UPDATE GrupoUsuarios SET ";
 
-		GrupoUsuarios.query(query, function (error, results) {
+		GrupoUsuarios.query(query, function (error, result) {
 
 			if(error)
 				//sails.log.debug(error);
 				return response({sucesso: false});
 
 			else 
-				return response(results);
+				return response(result);
 		});
 	},*/
 
@@ -39,7 +39,7 @@ module.exports = {
 		var query = "DELETE FROM GrupoUsuarios WHERE idGrupo = "+request.idGrupo+" AND usuario = "
 						+GrupoUsuarios.setMarks(request.usuario)+";";
 
-		GrupoUsuarios.query(query, function (error, results) {
+		GrupoUsuarios.query(query, function (error, result) {
 
 			if(error) {
 				result.sucesso = false;
@@ -57,7 +57,7 @@ module.exports = {
 
 		var query = "SELECT * FROM GrupoUsuarios WHERE usuario = "+GrupoUsuarios.setMarks(request.usuario)+";";
 
-		GrupoUsuarios.query(query, function (error, results) {
+		GrupoUsuarios.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
 				result.sucesso = false;
@@ -73,9 +73,9 @@ module.exports = {
 
 	selectByIdGrupo: function(request, response) {
 
-		var query = "SELECT * FROM GrupoUsuarios WHERE idGrupo = "+GrupoUsuarios.setMarks(request.idGrupo)+";";
+		var query = "SELECT * FROM GrupoUsuarios WHERE idGrupo = "+request.idGrupo+";";
 
-		GrupoUsuarios.query(query, function (error, results) {
+		GrupoUsuarios.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
 				result.sucesso = false;
