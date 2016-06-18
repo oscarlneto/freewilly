@@ -7,6 +7,8 @@ A Web project developed by students from Universidade de São Paulo.
 
 `$ npm install`
 
+`$ npm install sails-postgresql`
+
 `$ npm install -g bower`
 
 `$ cd assets`
