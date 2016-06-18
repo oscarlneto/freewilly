@@ -7,8 +7,6 @@ module.exports = {
 						+Usuario.setMarks(request.nome)+", TO_DATE("+Usuario.setMarks(request.aniversario)+", 'DD/MM/YYYY'), "
 						+Usuario.setMarks(request.foto)+", "+Usuario.setMarks(request.descricao)+");";
 
-		console.log(query);
-
 		Usuario.query(query, function (error, result) {
 
 			if(error) {

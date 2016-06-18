@@ -1,0 +1,8 @@
+## Ignore files
+
+freewilly-sails/.temp/
+freewilly-sails/assets/bower_components/
+freewilly-sails/node_modules/
+freewilly-sails/.editorconfig
+freewilly-sails/README.md
+
