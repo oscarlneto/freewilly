@@ -4,10 +4,13 @@ A Web project developed by students from Universidade de São Paulo.
 ## Download + Installation
 
 `$ cd freewilly-sails`
+
 `$ npm install`
+
 `$ npm install -g bower`
 
 `$ cd assets`
+
 `$ bower install`
 
 ## Usage
