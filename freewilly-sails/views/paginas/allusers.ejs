@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blog Home - Start Bootstrap Template</title>
+
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/users.css"/>
+    
+
+
+
+</head>
+<body ng-app="spicyApp1" background="/background.jpg">
+
+    <%- include navbar.ejs %>
+
+    <div ng-controller="allUsersController" class="container bootstrap snippet well" style="margin-top:100px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            <table class="table user-list">
+                                <thead>
+                                    <tr>
+                                        <th><span>User</span></th>
+                                        <th><span>Birthdate</span></th>
+                                        <th>Description</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="user in allusers">
+
+                                        <td>
+                                            <img ng-src="/avatar/{{user.avatar}}" class="img-circle" alt="">
+                                            <a href="#" class="user-link">{{user.usuario}}</a>
+                                            <span class="user-subhead">{{user.nome}}</span>
+                                        </td>
+                                        <td>{{user.data}}</td>
+
+                                        <td>{{user.descricao}}</td>
+                                        <td ng-hide="user.followed">
+                                            <button ng-click="follow($index)" class="btn btn-info" style="width: 85px;">Follow </button>
+                                        </td>
+                                        <td ng-show="user.followed">
+                                            <button ng-click="unfollow($index)" class="btn btn-success"> Following </button>
+                                        </td>
+
+                                    </tr>
+                        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "n",
+  "description": "trabalho de web",
+  "main": "",
+  "authors": [
+    "baleia"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "*",
+    "angular-route": "*",
+    "jquery": "*",
+    "bootstrap": "*"
+  }
+}

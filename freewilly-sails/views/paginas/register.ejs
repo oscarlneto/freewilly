@@ -1,0 +1,116 @@
+﻿<head>
+  <meta charset="UTF-8">
+  <title>Example - example-example8-production</title>
+  
+
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  
+</head>
+
+
+
+<body ng-app="spicyApp1" background="/background.jpg">
+ <%- include navbar.ejs %>
+
+ <div ng-controller="registerController" class="container">    
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+    <div class="panel panel-info" style="position: relative; top: 20px; opacity: 0.85;">
+      <div class="panel-heading">
+        <div class="panel-title">Sign Up</div>
+
+      </div>     
+
+      <div style="padding-top:30px" class="panel-body" >
+
+        <!-- -->
+        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+        <div
+
+        <form class="form-horizontal" action="" method="post">
+
+
+
+          <!-- Name input-->
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="name">Name</label>
+            <div class="col-md-9">
+              <input id="name" name="name" type="text" required placeholder="Your name" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="login">Login</label>
+            <div class="col-md-9">
+              <input id="login" name="login" type="text" required placeholder="Your login" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="password">Password</label>
+            <div class="col-md-9">
+              <input id="password" required name="password" type="password" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="date">Birthday</label>
+            <div class="col-md-9">
+              <input id="date" name="date" type="text" placeholder="14-04-1992" class="form-control">
+            </div>
+          </div>
+          <!--login, senha, nome de exibição, foto, descrição e data de nascimento.-->
+
+          <!-- Message body -->
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="description">Description</label>
+            <div class="col-md-9">
+              <textarea class="form-control" id="description" name="description" placeholder="Please enter your description here..." rows="5"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+
+           <label class="col-md-3 control-label" for="avatar">Select Your Avatar:</label>
+           <div class="col-md-6">
+            <select ng-model="avatar" class="form-control" id="avatar" name="avatar">
+             <option value="thrall.png">Thrall</option>
+             <option value="jaina.png">Jaina Proudmoore</option>
+             <option value="anduin.png">Anduin Wrynn</option>
+             <option value="valeera.png">Valeera Sanguinar</option>
+             <option value="uther.png">Uther Lightbringer</option>
+             <option value="guldan.png">Guldan</option>
+             <option value="garrosh.png">Garrosh Hellscream</option>
+             <option value="malfurion.png">Malfurion Stormrage</option>
+             <option value="rexxar.png">Rexxar</option>
+           </select>
+         </div>
+         <div class="col-md-2">
+           <img ng-src="/avatar/{{avatar}}" class="img-circle" height="75" width="75">
+         </div>
+       </div>
+
+
+       <!-- Form actions -->
+       <div class="form-group">
+        <div class="col-md-12 text-right">
+          <button id="btn-login" ng-click="createUser()" class="btn btn-success">Sign Up</button>
+        </div>
+      </div>
+
+
+
+
+    </form>     
+
+
+
+  </div>                     
+</div>  
+</div>
+
+</div>
+
+
+</body>
+

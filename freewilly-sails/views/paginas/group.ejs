@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blog Home - Start Bootstrap Template</title>
+
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    
+
+
+
+</head>
+
+<body ng-app="spicyApp1" background="/background.jpg">
+
+    <%- include navbar.ejs %>
+
+    <!-- Page Content -->
+    <div class="container well" style="margin-top:100px;">
+
+        <div ng-controller="groupController" class="col-md-6">
+         <h1>{{group.nome}}</h1a>
+         </div>
+
+
+
+         <div ng-controller="postController" class="row">
+
+            <!-- Blog Entries Column -->
+            <div id="posts" class="col-md-8">
+
+                <h1 class="page-header">
+                    Latest Posts
+                    <small><a href="#" onclick="$('#posts').hide(); $('#newpost').show();">Post something</a></small>
+                    <!--<small><a href="/freewilly/login">Post something</a></small>-->
+                </h1>
+                <div ng-repeat="post in posts" class="col-md-12 well row" style="background: rgb(219, 248, 251); margin-left: 10px;">
+                    <div class="col-md-2">
+                        <img src="/avatar/thrall.png" class="img-circle" height="90" width="90">
+                    </div>
+                    <h2>
+                        {{post.titulo}}
+                    </h2>
+                    <p class="lead">
+                        by <a href="/freewilly/usuario?login=">{{post.usuario}}</a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> {{post.data}}</p>
+                    <hr>
+                    <p>{{post.conteudo}}</p>
+
+                    <hr>
+                    <div ng-show="post.followed" class="col-xs-12 col-sm-4 emphasis">
+                        <button ng-click="unfollow($index)" class="btn btn-success btn-block"> Following </button>
+                    </div>
+
+                    <div ng-hide="post.followed" class="col-xs-12 col-sm-4 emphasis">
+                        <button ng-click="follow($index)" class="btn btn-info btn-block"> Follow </button>
+                    </div>
+
+                    <div ng-show="post.liked" class="col-xs-12 col-sm-4 emphasis">
+                        <button ng-click="unlike($index)" class="btn btn-success btn-block"> Liked </button>
+                    </div>
+
+                    <div ng-hide="post.liked" class="col-xs-12 col-sm-4 emphasis">
+                        <button ng-click="like($index)" class="btn btn-info btn-block"> Like </button>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+            <div id="newpost" style="display:none;" class="col-md-8">
+             <form class="form-horizontal" action="" method="post">
+                <h1 class="page-header">
+                    New Post
+                    <small><a href="#" onclick="$('#newpost').hide(); $('#posts').show();">Go back to posts</a></small>
+                </h1>
+
+                <div class="form-group">
+                  <label class="col-md-3 control-label" for="title">Title</label>
+                  <div class="col-md-9">
+                    <input ng-model="title" id="title" name="title" type="text" placeholder="Your login" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="content">Message</label>
+              <div class="col-md-9">
+                <textarea ng-model="content" class="form-control" id="content" name="content" placeholder="Write something to share with others" rows="5"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-12 text-right">
+            <a href="/post/newpost" type="submit" class="btn btn-primary btn">Post</a>
+        </div>
+    </div>
+
+
+
+</form>
+</div>
+
+<!-- Blog Sidebar Widgets Column -->
+<div ng-controller="myGroupController" class="col-md-4">
+
+    <!-- Blog Categories Well -->
+        <button ng-show="group.member" ng-click="leave()" class="btn btn-success btn-block"> Leave group </button>
+        <button ng-hide="group.member" ng-click="join()" class="btn btn-info btn-block"> Enter group </button>
+
+    <div class="panel panel-success" style="display:none;">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Hot Topics</h3>
+            </div>
+            <ul class="list-group">
+                <!--<a ng-repeat="group in groups" href="#" class="list-group-item">{{group.nome}}</a>-->
+            </ul>
+        </div>
+
+        <div class="panel panel-info" style="margin-top: 20px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    My Groups</h3>
+                </div>
+                <ul class="list-group">
+                    <a ng-repeat="group in groups" href="group" class="list-group-item">{{group.nome}}</a>
+
+                </ul>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; TPC & OSL</p>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </footer>
+
+</div>
+<!-- /.container -->
+
+
+
+</body>
+
+</html>
