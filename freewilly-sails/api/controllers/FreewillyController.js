@@ -19,5 +19,8 @@ module.exports={
 	},
 	about: function (req, res) {
 		res.view('paginas/about', {cwd: 'spicty'});
+	},
+	profile: function (req, res) {
+		res.view('paginas/profile', {cwd: 'spicty'});
 	}
 };
