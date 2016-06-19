@@ -46,5 +46,17 @@ module.exports = {
 			return "'"+string+"'";
 
 		return string;
+	},
+
+	formatDateTime: function (result) {
+		
+		for (var i = 0; i < result.rowCount; i++) {
+
+			if (result.rows[i].data != null){
+
+				var date = new Date(result.rows[i].data);
+				result.rows[i].data = date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+			}
+		}
 	}
 };

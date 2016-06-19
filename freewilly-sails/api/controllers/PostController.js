@@ -86,7 +86,7 @@ module.exports = {
 		var post = {};
 		post.usuario = Post.setUndefined(request.param('usuario'));
 
-		PostService.selectBy(post, function (result) {
+		PostService.selectByUsuarioFollow(post, function (result) {
 			response.json(result);
 		});
 	}

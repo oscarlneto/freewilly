@@ -89,6 +89,9 @@ module.exports = {
 			}
 
 			else {
+
+				Post.formatDateTime(result);
+
 				result.sucesso = true;
 				return response(result);
 			}
@@ -107,6 +110,8 @@ module.exports = {
 			}
 
 			else {
+				Post.formatDateTime(result);
+
 				result.sucesso = true;
 				return response(result);
 			}
@@ -115,9 +120,10 @@ module.exports = {
 
 	selectByUsuarioFollow: function(request, response) {
 
-		var query = "SELECT Post.idPost, Post.usuario, Post.titulo, Post.conteudo, Post.data "
-						+"FROM Post JOIN Follow ON Post.usuario = Follow.follow WHERE Follow.usuario = "
-						+Post.setMarks(request.usuario)+" ORDER BY Post.data DESC;";
+		var query = "SELECT Post.idPost, Post.usuario, Post.titulo, Post.conteudo, Post.data, Usuario.foto "
+						+"FROM Post JOIN Follow ON Post.usuario = Follow.follow "
+						+"JOIN Usuario ON Post.usuario = Usuario.usuario "
+						+"WHERE Follow.usuario = "+Post.setMarks(request.usuario)+" ORDER BY Post.data DESC;";
 
 		Post.query(query, function (error, result) {
 =======
@@ -129,6 +135,8 @@ module.exports = {
 			}
 
 			else {
+				Post.formatDateTime(result);
+
 				result.sucesso = true;
 				return response(result);
 			}

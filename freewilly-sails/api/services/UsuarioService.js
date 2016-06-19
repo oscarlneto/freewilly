@@ -24,7 +24,8 @@ module.exports = {
 	update: function(request, response) {
 
 		var query = "UPDATE Usuario SET senha = "+Usuario.setMarks(request.senha)+", nome = "+Usuario.setMarks(request.nome)+", "
-						+"aniversario = "+Usuario.setMarks(request.aniversario)+", foto = "+Usuario.setMarks(request.foto)+", "
+						+"aniversario = TO_DATE("+Usuario.setMarks(request.aniversario)+", 'DD/MM/YYYY'), "
+						+"foto = "+Usuario.setMarks(request.foto)+", "
 						+"descricao = "+Usuario.setMarks(request.descricao)+" WHERE usuario = "+Usuario.setMarks(request.usuario)+";";
 
 		Usuario.query(query, function (error, result) {
@@ -65,14 +66,14 @@ module.exports = {
 
 		Usuario.query(query, function (error, result) {
 
-			console.log(result);
-
 			if(error || result.rowCount == 0) {
 				result.sucesso = false;
 				return response(result);
 			}
 
 			else {
+				Usuario.formatDate(result);
+
 				result.sucesso = true;
 				return response(result);
 			}
@@ -92,6 +93,8 @@ module.exports = {
 			}
 
 			else {
+				Usuario.formatDate(result);
+
 				result.sucesso = true;
 				return response(result);
 			}

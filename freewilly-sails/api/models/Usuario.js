@@ -49,5 +49,17 @@ module.exports = {
 			return "'"+string+"'";
 
 		return string;
+	},
+
+	formatDate: function (result) {
+		
+		for (var i = 0; i < result.rowCount; i++) {
+
+			if (result.rows[i].aniversario != null){
+
+				var date = new Date(result.rows[i].aniversario);
+				result.rows[i].aniversario = date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+			}
+		}
 	}
 };
