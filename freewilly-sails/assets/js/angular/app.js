@@ -72,7 +72,26 @@ myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
      var usuario = {usuario: sessionStorage.getItem('usuario')};
 
     $http.post("http://localhost:1337/post/getByUsuarioFollow", usuario).then(function(response) {
-      $scope.posts = response.data.rows;
+
+      for (var i = 0; i < response.data.rowCount; i++) {
+
+        $http.post("http://localhost:1337/postreacao/get", {idPost : response.data.rows[i].idpost, 
+          usuario: sessionStorage.getItem('usuario')}).then(function(res) {
+
+            if(res.data.sucesso){
+              console.log(res.data.rows[0].reacao);
+              response.data.rows[0].reacao = res.data.rows[0].reacao;
+              response.data.rows[0].compartilhou = res.data.rows[0].compartilhou;
+            }
+        });
+      }
+
+      //response.data.rows[0].reacao = 1;
+
+       $scope.posts = response.data.rows;
+
+       console.log(response.data.rows);
+
     });
   }
 

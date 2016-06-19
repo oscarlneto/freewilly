@@ -6,9 +6,12 @@ module.exports = {
 						+Post.setMarks(request.usuario)+", "+Post.setMarks(request.titulo)+", "
 						+Post.setMarks(request.conteudo)+", "+request.idGrupo+");";
 
+		console.log(query);
+
 		Post.query(query, function (error, result) {
 
 			if(error) {
+				console.log(result);
 				result.sucesso = false;
 				return response(result);
 			}
