@@ -57,6 +57,13 @@ module.exports = {
 		});
 	},
 
+	getAll: function (request, response) {
+
+		UsuarioService.selectAll(usuario, function (result) {
+			response.json(result);
+		});
+	},
+
 	login: function (request, response) {
 
 		var usuario = {};
@@ -64,14 +71,7 @@ module.exports = {
 		usuario.senha =  Usuario.setUndefined(request.param('senha'));
 
 		UsuarioService.selectByUsuarioAndSenha(usuario, function (result) {
-
-			if(result.sucesso == false)
-				return response.json(result);
-
-			request.session.usuario = result.usuario;
-			request.session.autenticou = true;
-
-			 return response.json(result);
+			 response.json(result);
 		});
 	}
 }

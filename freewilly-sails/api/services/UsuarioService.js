@@ -76,6 +76,25 @@ module.exports = {
 		});
 	},
 
+	selectAll: function(request, response) {
+
+		var query = "SELECT * FROM Usuario;";
+
+		Usuario.query(query, function (error, result) {
+
+			if(error || result.rowCount == 0) {
+				return response({sucesso: false});
+			}
+
+			else {
+				Usuario.formatDate(result);
+
+				result.sucesso = true;
+				return response(result);
+			}
+		});
+	},
+
 	selectByUsuarioAndSenha: function(request, response) {
 
 		var query = "SELECT * FROM Usuario WHERE usuario = "+Usuario.setMarks(request.usuario)
