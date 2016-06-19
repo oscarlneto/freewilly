@@ -106,7 +106,7 @@
         My Groups</h3>
       </div>
       <ul class="list-group">
-        <a ng-repeat="group in groups" href="group" class="list-group-item">{{group.idgrupo}}</a>
+        <a ng-repeat="group in groups" href="group" class="list-group-item">{{group.nome}}</a>
 
       </ul>
     </div>
@@ -114,7 +114,6 @@
   </div>
 
   <div ng-controller="myPostsController" ng-init="loadPosts();" class="col-md-8" style="margin-top: 20px;">
-    <div class="jumbotron">aewaew {{rt.usuario}} {{rp.foto}}</div>
     <div ng-repeat="post in posts" class="well">
       <div  class="media">
         <a class="pull-left" href="#">
@@ -149,7 +148,7 @@
             Groups I Own</h3>
           </div>
           <ul class="list-group">
-            <a ng-repeat="group in groups" href="group" class="list-group-item">{{group.idgrupo}}</a>
+            <a ng-repeat="group in groups" href="group" class="list-group-item">{{group.nome}}</a>
 
           </ul>
         </div>

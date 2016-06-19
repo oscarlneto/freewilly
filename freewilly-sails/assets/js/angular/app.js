@@ -34,7 +34,7 @@ myApp.controller('myPostsController', ['$scope', '$http', function($scope, $http
   $scope.loadPosts = function(){
     var usuario = {usuario: sessionStorage.getItem('usuario')};
     $http.post("http://localhost:1337/post/getByUsuario", usuario).then(function(response) {
-      $scope.posts = response.data.rows;      
+      $scope.posts = response.data.rows;
     });
   }
 
@@ -69,8 +69,9 @@ myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.loadPosts = function(){
-    var usuario = {usuario: getParameterByName('username')};
-    $http.post("http://localhost:1337/post/getByUsuario", usuario).then(function(response) {
+     var usuario = {usuario: sessionStorage.getItem('usuario')};
+
+    $http.post("http://localhost:1337/post/getByUsuarioFollow", usuario).then(function(response) {
       $scope.posts = response.data.rows;
     });
   }
@@ -115,6 +116,7 @@ myApp.controller('groupListController', ['$scope', '$http', function($scope, $ht
 }]);
 
 myApp.controller('myGroupsListController', ['$scope', '$http', function($scope, $http) {
+
   $scope.groups = {};
 
   $scope.loadGroups = function(){

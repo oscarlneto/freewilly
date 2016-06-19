@@ -55,7 +55,8 @@ module.exports = {
 
 	selectByUsuario: function(request, response) {
 
-		var query = "SELECT * FROM GrupoUsuarios WHERE usuario = "+GrupoUsuarios.setMarks(request.usuario)+";";
+		var query = "SELECT * FROM GrupoUsuarios JOIN Grupo ON GrupoUsuarios.idGrupo = Grupo.idGrupo "
+						+"WHERE GrupoUsuarios.usuario = "+GrupoUsuarios.setMarks(request.usuario)+";";
 
 		GrupoUsuarios.query(query, function (error, result) {
 

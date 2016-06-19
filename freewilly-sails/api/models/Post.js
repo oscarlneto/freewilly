@@ -55,7 +55,7 @@ module.exports = {
 			if (result.rows[i].data != null){
 
 				var date = new Date(result.rows[i].data);
-				result.rows[i].data = date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+				result.rows[i].data = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
 			}
 		}
 	}

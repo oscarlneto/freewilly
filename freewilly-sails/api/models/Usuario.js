@@ -58,7 +58,7 @@ module.exports = {
 			if (result.rows[i].aniversario != null){
 
 				var date = new Date(result.rows[i].aniversario);
-				result.rows[i].aniversario = date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+				result.rows[i].aniversario = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
 			}
 		}
 	}
