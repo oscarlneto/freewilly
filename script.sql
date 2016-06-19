@@ -31,6 +31,24 @@ CREATE TABLE Follow (
 	CONSTRAINT PKfollow PRIMARY KEY (usuario, follow)
 );
 
+CREATE TABLE Grupo (
+	idGrupo SERIAL NOT NULL,
+	usuario VARCHAR(10) NOT NULL,
+	nome VARCHAR(20) NOT NULL,
+	foto VARCHAR(50),
+	descricao VARCHAR(200),
+	CONSTRAINT PKgrupo PRIMARY KEY (idGrupo),
+	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE
+);
+
+CREATE TABLE GrupoUsuarios (
+	idGrupo INTEGER NOT NULL,
+	usuario VARCHAR(10) NOT NULL,
+	CONSTRAINT FKgrupo FOREIGN KEY (idGrupo) REFERENCES Grupo (idGrupo) ON DELETE CASCADE,
+	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE,
+	CONSTRAINT PKgrupoUsuarios PRIMARY KEY (idGrupo, usuario)
+);
+
 CREATE TABLE Post (
 	idPost SERIAL NOT NUll,
 	usuario VARCHAR(10) NOT NULL,
@@ -52,22 +70,4 @@ CREATE TABLE PostReacao (
 	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE,
 	CONSTRAINT PKpostReacao PRIMARY KEY (idPost, usuario),
 	CONSTRAINT CHreacao CHECK (reacao IN (0, 1, 2))
-);
-
-CREATE TABLE Grupo (
-	idGrupo SERIAL NOT NULL,
-	usuario VARCHAR(10) NOT NULL,
-	nome VARCHAR(20) NOT NULL,
-	foto VARCHAR(50),
-	descricao VARCHAR(200),
-	CONSTRAINT PKgrupo PRIMARY KEY (idGrupo),
-	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE
-);
-
-CREATE TABLE GrupoUsuarios (
-	idGrupo INTEGER NOT NULL,
-	usuario VARCHAR(10) NOT NULL,
-	CONSTRAINT FKgrupo FOREIGN KEY (idGrupo) REFERENCES Grupo (idGrupo) ON DELETE CASCADE,
-	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE,
-	CONSTRAINT PKgrupoUsuarios PRIMARY KEY (idGrupo, usuario)
 );
