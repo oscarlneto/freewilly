@@ -81,6 +81,7 @@ module.exports = {
 		var query = "SELECT * FROM Post WHERE usuario = "+Post.setMarks(request.usuario)+" ORDER BY data DESC;";
 
 		Post.query(query, function (error, result) {
+<<<<<<< Updated upstream
 
 			if(error || result.rowCount == 0) {
 				result.sucesso = false;
@@ -119,6 +120,8 @@ module.exports = {
 						+Post.setMarks(request.usuario)+" ORDER BY Post.data DESC;";
 
 		Post.query(query, function (error, result) {
+=======
+>>>>>>> Stashed changes
 
 			if(error || result.rowCount == 0) {
 				result.sucesso = false;

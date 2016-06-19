@@ -13,39 +13,45 @@
 <body ng-app="spicyApp1" background="/background.jpg">
  <%- include navbar.ejs %>
 
- <div ng-controller="profileController" ng-init="loadUser()" class="container">    
-  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-    <div class="panel panel-info" style="position: relative; top: 20px; opacity: 0.85;">
-      <div class="panel-heading">
-        <div class="panel-title">My Profile</div>
-
-      </div>     
-
-      <div style="padding-top:30px" class="panel-body" >
-
-        <!-- -->
-        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-
-        <div
-
-        <form class="form-horizontal" action="" method="post">
-
-
-
-          <!-- Name input-->
-          <div class="form-group">
-            <label class="col-md-3 control-label" for="name">Name</label>
-            <div class="col-md-9">
-              <input id="name" name="name" type="text" required ng-value="usuario.nome" class="form-control">
+ <div class="container">   
+   <div class="row"> 
+    <div ng-controller="profileController" ng-init="loadUser()" id="loginbox" style="margin-top:50px;" class="col-md-8">                    
+      <div class="panel panel-info" style="position: relative; top: 20px; opacity: 0.85;">
+        <div class="panel-heading clearfix">
+          <div class="panel-title">My Profile
+            <div class="pull-right">
+              <button ng-click="removeUser();" class="btn btn-danger btn-sm">Terminate Account</button>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="col-md-3 control-label" for="login">Login</label>
-            <div class="col-md-9">
-              <input id="login" name="login" type="text" required ng-value="usuario.usuario" disabled class="form-control">
+
+        </div>     
+
+        <div style="padding-top:30px" class="panel-body" >
+
+          <!-- -->
+          <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+
+
+          <form class="form-horizontal" action="" method="post">
+
+
+
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Name</label>
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" required ng-value="usuario.nome" class="form-control">
+              </div>
             </div>
-          </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="login">Login</label>
+              <div class="col-md-9">
+                <input id="login" name="login" type="text" required ng-value="usuario.usuario" disabled class="form-control">
+              </div>
+            </div>
 
           <!--<div class="form-group">
             <label class="col-md-3 control-label" for="date">Birthday</label>
@@ -82,27 +88,78 @@
            <img ng-src="/avatar/{{usuario.foto}}" class="img-circle" height="75" width="75">
          </div>
        </div>
-
-
        <!-- Form actions -->
        <div class="form-group">
         <div class="col-md-12 text-right">
           <button id="btn-login" ng-click="updateUser()" class="btn btn-success">Update</button>
         </div>
       </div>
-
-
-
-
     </form>     
-
-
-
   </div>                     
 </div>  
 </div>
+<div ng-controller="groupListController" ng-init="loadGroups();" class="col-md-4" style="margin-top: 70px;">
 
-</div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        My Groups</h3>
+      </div>
+      <ul class="list-group">
+        <a ng-repeat="group in groups" href="group" class="list-group-item">{{group.idgrupo}}</a>
+
+      </ul>
+    </div>
+
+  </div>
+
+  <div ng-controller="myPostsController" ng-init="loadPosts();" class="col-md-8" style="margin-top: 20px;">
+    <div class="jumbotron">aewaew {{rt.usuario}} {{rp.foto}}</div>
+    <div ng-repeat="post in posts" class="well">
+      <div  class="media">
+        <a class="pull-left" href="#">
+          <img ng-src="/avatar/{{post.foto}}" class="img-circle" height="125" width="125">
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading">{{post.titulo}}</h4>
+          <p class="text-left">{{post.usuario}}</p>
+          <p>{{post.conteudo}}</p>
+          <ul class="list-inline list-unstyled">
+            <li><span><i class="glyphicon glyphicon-calendar"></i> {{post.data}} </span></li>
+            <li>|</li>
+            <li ng-show="post.liked"><span><button class="btn btn-info btn-sm">Liked</button></span></li>
+            <li ng-hide="post.liked"><span><button class="btn btn-info btn-sm">Like</button></span></li>
+            <li>|</li>
+            <li ng-show="post.shared"><span><button class="btn btn-info btn-sm">Shared</button></span></li>
+            <li ng-hide="post.shared"><span><button class="btn btn-info btn-sm">Share</button></span></li>
+            <li>|</li>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div ng-controller="myGroupsListController" ng-init="loadGroups();"class="col-md-4" style="margin-top: 20px;">
+
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            Groups I Own</h3>
+          </div>
+          <ul class="list-group">
+            <a ng-repeat="group in groups" href="group" class="list-group-item">{{group.idgrupo}}</a>
+
+          </ul>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
 
 
 </body>
