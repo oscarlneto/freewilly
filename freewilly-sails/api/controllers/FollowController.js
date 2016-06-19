@@ -52,6 +52,16 @@ module.exports = {
 		FollowService.selectByUsuario(follow, function (result) {
 			response.json(result);
 		});
+	},
+
+	getByFollow: function (request, response) {
+
+		var follow = {};
+		follow.follow = Follow.setUndefined(request.param('usuario'));
+
+		FollowService.selectByFollow(follow, function (result) {
+			response.json(result);
+		});
 	}
 };
 

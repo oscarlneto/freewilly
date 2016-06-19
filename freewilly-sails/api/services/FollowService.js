@@ -53,7 +53,28 @@ module.exports = {
 
 	selectByUsuario: function(request, response) {
 
-		var query = "SELECT * FROM Follow WHERE usuario = "+Follow.setMarks(request.usuario)+";";
+		var query = "SELECT Usuario.usuario, Usuario.nome, Usuario.aniversaio, Usuario.foto, Usuario.descricao "
+						+"FROM Follow JOIN Usuario ON Follow.follow = Usuario.usuario "
+						+"WHERE Follow.usuario = "+Follow.setMarks(request.usuario)+";";
+
+		Follow.query(query, function (error, result) {
+
+			if(error || result.rowCount == 0) {
+				return response({sucesso: false});
+			}
+
+			else {
+				result.sucesso = true;
+				return response(result);
+			}
+		});
+	},
+
+	selectByFollow: function(request, response) {
+
+		var query = "SELECT Usuario.usuario, Usuario.nome, Usuario.aniversaio, Usuario.foto, Usuario.descricao "
+						+"FROM Follow JOIN Usuario ON Follow.usuario = Usuario.usuario "
+						+"WHERE Follow.follow = "+Follow.setMarks(request.follow)+";";
 
 		Follow.query(query, function (error, result) {
 
