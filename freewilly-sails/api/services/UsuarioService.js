@@ -65,6 +65,8 @@ module.exports = {
 
 		Usuario.query(query, function (error, result) {
 
+			console.log(result);
+
 			if(error || result.rowCount == 0) {
 				result.sucesso = false;
 				return response(result);

@@ -78,7 +78,7 @@ module.exports = {
 
 	selectByUsuario: function(request, response) {
 
-		var query = "SELECT * FROM Post WHERE usuario = "+Post.setMarks(request.usuario)+";";
+		var query = "SELECT * FROM Post WHERE usuario = "+Post.setMarks(request.usuario)+" ORDER BY data DESC;";
 
 		Post.query(query, function (error, result) {
 
@@ -96,7 +96,26 @@ module.exports = {
 
 	selectByGrupo: function(request, response) {
 
-		var query = "SELECT * FROM Post WHERE idGrupo = "+request.idGrupo+";";
+		var query = "SELECT * FROM Post WHERE idGrupo = "+request.idGrupo+" ORDER BY data DESC;";
+
+		Post.query(query, function (error, result) {
+
+			if(error || result.rowCount == 0) {
+				result.sucesso = false;
+				return response(result);
+			}
+
+			else {
+				result.sucesso = true;
+				return response(result);
+			}
+		});
+	},
+
+	selectByUsuarioFollow: function(request, response) {
+
+		var query = "SELECT * FROM Post JOIN Follow ON Post.usuario = Follow.follow WHERE Follow.usuario = "
+						+Post.setMarks(request.usuario)+" ORDER BY Post.data DESC;";
 
 		Post.query(query, function (error, result) {
 

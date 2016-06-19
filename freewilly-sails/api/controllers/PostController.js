@@ -79,5 +79,15 @@ module.exports = {
 		PostService.selectByGrupo(post, function (result) {
 			response.json(result);
 		});
+	},
+
+	getByUsuarioFollow: function (request, response) {
+
+		var post = {};
+		post.usuario = Post.setUndefined(request.param('usuario'));
+
+		PostService.selectBy(post, function (result) {
+			response.json(result);
+		});
 	}
 }
