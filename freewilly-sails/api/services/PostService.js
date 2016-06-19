@@ -114,7 +114,8 @@ module.exports = {
 
 	selectByUsuarioFollow: function(request, response) {
 
-		var query = "SELECT * FROM Post JOIN Follow ON Post.usuario = Follow.follow WHERE Follow.usuario = "
+		var query = "SELECT Post.idPost, Post.usuario, Post.titulo, Post.conteudo, Post.data "
+						+"FROM Post JOIN Follow ON Post.usuario = Follow.follow WHERE Follow.usuario = "
 						+Post.setMarks(request.usuario)+" ORDER BY Post.data DESC;";
 
 		Post.query(query, function (error, result) {
