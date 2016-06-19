@@ -11,9 +11,7 @@ module.exports = {
 		Post.query(query, function (error, result) {
 
 			if(error) {
-				console.log(result);
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {
@@ -32,8 +30,7 @@ module.exports = {
 		Post.query(query, function (error, result) {
 
 			if(error) {
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {
@@ -50,8 +47,7 @@ module.exports = {
 		Post.query(query, function (error, result) {
 
 			if(error) {
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {
@@ -68,8 +64,7 @@ module.exports = {
 		Post.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {
@@ -87,8 +82,7 @@ module.exports = {
 		Post.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {
@@ -103,13 +97,15 @@ module.exports = {
 
 	selectByGrupo: function(request, response) {
 
-		var query = "SELECT * FROM Post WHERE idGrupo = "+request.idGrupo+" ORDER BY data DESC;";
+		var query = "SELECT Post.idPost, Post.usuario, Post.titulo, Post.conteudo, Post.data, Usuario.foto "
+						+"FROM Post JOIN GrupoUsuarios ON Post.idGrupo = GrupoUsuarios.idGrupo "
+						+"JOIN Usuario ON Post.usuario = Usuario.usuario "
+						+"WHERE idGrupo = "+request.idGrupo+" ORDER BY data DESC;";
 
 		Post.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {
@@ -131,8 +127,7 @@ module.exports = {
 		Post.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {

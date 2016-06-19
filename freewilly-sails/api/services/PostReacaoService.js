@@ -9,8 +9,7 @@ module.exports = {
 		PostReacao.query(query, function (error, result) {
 
 			if(error) {
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {
@@ -28,8 +27,7 @@ module.exports = {
 		PostReacao.query(query, function (error, result) {
 
 			if(error) {
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {
@@ -47,8 +45,7 @@ module.exports = {
 		PostReacao.query(query, function (error, result) {
 
 			if(error) {
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {
@@ -65,11 +62,8 @@ module.exports = {
 
 		PostReacao.query(query, function (error, result) {
 
-			console.log(result);
-
 			if(error || result.rowCount == 0) {
-				result.sucesso = false;
-				return response(result);
+				return response({sucesso: false});
 			}
 
 			else {
