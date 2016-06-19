@@ -3,7 +3,7 @@ body{
 }
 
 .panel-body{
-	background-image: url('/banner/banner10.jpg');
+	background-image: url('/banner/background_panel.jpg');
 	background-size: 100% auto;
 }
 
@@ -12,7 +12,7 @@ body{
 }
 
 .bgimg{
-	background-image: url('/banner/banner06.jpg');
+	background-image: url('/banner/background_post.jpg');
 	background-size: 100% auto;
 	color: white;
 }
