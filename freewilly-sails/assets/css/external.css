@@ -1,0 +1,18 @@
+body{
+	background-size:100% auto;
+}
+
+.panel-body{
+	background-image: url('/banner/banner10.jpg');
+	background-size: 100% auto;
+}
+
+.control-label{
+	color: white;
+}
+
+.bgimg{
+	background-image: url('/banner/banner06.jpg');
+	background-size: 100% auto;
+	color: white;
+}

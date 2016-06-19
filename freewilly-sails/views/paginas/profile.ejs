@@ -5,6 +5,8 @@
 
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/css/external.css"/>
   
 </head>
 
@@ -16,7 +18,7 @@
  <div class="container">   
    <div class="row"> 
     <div ng-controller="profileController" ng-init="loadUser()" id="loginbox" style="margin-top:50px;" class="col-md-8">                    
-      <div class="panel panel-info" style="position: relative; top: 20px; opacity: 0.85;">
+      <div class="panel panel-info" style="position: relative; top: 20px; opacity: 0.90;">
         <div class="panel-heading clearfix">
           <div class="panel-title">My Profile
             <div class="pull-right">
@@ -27,7 +29,7 @@
 
         </div>     
 
-        <div style="padding-top:30px" class="panel-body" >
+        <div style="padding-top:30px" class="panel-body">
 
           <!-- -->
           <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
@@ -85,7 +87,7 @@
            </select>
          </div>
          <div class="col-md-2">
-           <img ng-src="/avatar/{{usuario.foto}}" class="img-circle" height="75" width="75">
+           <img ng-src="/avatar/{{usuario.foto}}" class="img-rounded" height="75" width="75">
          </div>
        </div>
        <!-- Form actions -->
@@ -106,7 +108,7 @@
         My Groups</h3>
       </div>
       <ul class="list-group">
-        <a ng-repeat="group in groups" href="group" class="list-group-item">{{group.nome}}</a>
+        <a ng-repeat="group in groups" ng-href="/freewilly/groupindex?group={{group.idgrupo}}" class="list-group-item">{{group.nome}}</a>
 
       </ul>
     </div>
@@ -114,7 +116,7 @@
   </div>
 
   <div ng-controller="myPostsController" ng-init="loadPosts();" class="col-md-8" style="margin-top: 20px;">
-    <div ng-repeat="post in posts" class="well">
+    <div ng-repeat="post in posts" class="well bgimg">
       <div  class="media">
         <a class="pull-left" href="#">
           <img ng-src="/avatar/{{post.foto}}" class="img-circle" height="125" width="125">
@@ -148,7 +150,8 @@
             Groups I Own</h3>
           </div>
           <ul class="list-group">
-            <a ng-repeat="group in groups" href="group" class="list-group-item">{{group.nome}}</a>
+            <a ng-repeat="group in groups" ng-href="/freewilly/groupindex?group={{group.idgrupo}}" class="list-group-item">{{group.nome}}</a>
+            <a href="group" class=" btn btn-block btn-success">New group</a>
 
           </ul>
         </div>

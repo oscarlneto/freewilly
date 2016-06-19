@@ -38,22 +38,6 @@ myApp.controller('myPostsController', ['$scope', '$http', function($scope, $http
     });
   }
 
-  $scope.createPost = function(){
-    var post = {};
-
-    post.usuario = sessionStorage.getItem("usuario");
-    post.titulo = $('#postTitle').val();
-    post.conteudo = $('#postContent').val();
-
-    $http.post('http://localhost:1337/post/create', post).then(function(response) {
-      if(response.data.sucesso)
-       $window.location.href = 'http://localhost:1337/freewilly/profile';
-   });
-
-  }
-
-
-
 }]);
 
 myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
@@ -69,31 +53,133 @@ myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.loadPosts = function(){
-     var usuario = {usuario: sessionStorage.getItem('usuario')};
+   var usuario = {usuario: sessionStorage.getItem('usuario')};
 
-    $http.post("http://localhost:1337/post/getByUsuarioFollow", usuario).then(function(response) {
+   $http.post("http://localhost:1337/post/getByUsuarioFollow", usuario).then(function(response) {
 
-      for (var i = 0; i < response.data.rowCount; i++) {
+    for (var i = 0; i < response.data.rowCount; i++) {
 
-        $http.post("http://localhost:1337/postreacao/get", {idPost : response.data.rows[i].idpost, 
-          usuario: sessionStorage.getItem('usuario')}).then(function(res) {
+      $http.post("http://localhost:1337/postreacao/get", {idPost : response.data.rows[i].idpost, 
+        usuario: sessionStorage.getItem('usuario')}).then(function(res) {
 
-            if(res.data.sucesso){
-              console.log(res.data.rows[0].reacao);
-              response.data.rows[0].reacao = res.data.rows[0].reacao;
-              response.data.rows[0].compartilhou = res.data.rows[0].compartilhou;
-            }
+          if(res.data.sucesso){
+            console.log(res.data.rows[0].reacao);
+            response.data.rows[0].reacao = res.data.rows[0].reacao;
+            response.data.rows[0].compartilhou = res.data.rows[0].compartilhou;
+          }
         });
       }
 
       //response.data.rows[0].reacao = 1;
 
-       $scope.posts = response.data.rows;
+      $scope.posts = response.data.rows;
 
-       console.log(response.data.rows);
+      console.log(response.data.rows);
 
     });
+ }
+
+
+}]);
+
+myApp.controller('groupIndexController', ['$scope', '$http', function($scope, $http) {
+  $scope.group = {};
+
+  $scope.loadGroup = function(){
+
+    var grupo = {};
+
+    grupo.idGrupo = getParameterByName('group');
+
+    $http.post('http://localhost:1337/grupo/get', grupo).then(function(response) {
+
+      if(response.data.sucesso == true)
+      {
+        console.log('rf ' + response.data);
+        $scope.group = response.data.rows[0];
+      }
+    });
+
   }
+
+  $scope.removeGroup = function(){
+    var grupo = {};
+    
+    grupo.idGrupo = getParameterByName('group');
+
+    $http.post('http://localhost:1337/grupo/remove', grupo).then(function(response) {
+
+      if(response.data.sucesso == true)
+      {
+        console.log('deletado');
+      }
+    });
+
+  }
+
+
+}]);
+
+myApp.controller('groupMemberList', ['$scope', '$http', function($scope, $http) {
+  $scope.members= {};
+
+  $scope.loadMembers = function(){
+
+    var grupo = {};
+
+    grupo.idGrupo = getParameterByName('group');
+
+    $http.post('http://localhost:1337/GrupoUsuarios/getByIdGrupo', grupo).then(function(response) {
+
+      if(response.data.sucesso == true)
+      {
+        $scope.members = response.data.rows;
+      }
+    });
+
+  }
+
+}]);
+
+myApp.controller('newGroupController', ['$scope', '$http', function($scope, $http) {
+  $scope.banner = 'panel-body bgimg';
+
+  $scope.createGroup = function(){
+    var group = {};
+
+    group.usuario = sessionStorage.getItem('usuario');
+    group.nome = $('#groupName').val();
+    group.foto = 'thrall.png';
+    group.descricao = $('#groupDescription').val();
+
+    $http.post('http://localhost:1337/Grupo/create', group).then(function(response) {
+      if(response.data.sucesso)
+        console.log(response.data.sucesso);
+    });
+
+  }
+
+
+}]);
+
+
+myApp.controller('newPostController', ['$scope', '$http', function($scope, $http) {
+  $scope.inGroup = '';
+  $scope.myGroups = {};
+
+  $scope.loadMyGroups = function(){
+    var usuario = {usuario: sessionStorage.getItem("usuario")};
+
+    $http.post('http://localhost:1337/GrupoUsuarios/getByUsuario', usuario).then(function(response) {
+      if(response.data.sucesso)
+
+        $scope.myGroups = response.data.rows;
+      console.log($scope.myGroups);
+    });
+
+  }
+
+
 
   $scope.createPost = function(){
     var post = {};
@@ -101,6 +187,7 @@ myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
     post.usuario = sessionStorage.getItem("usuario");
     post.titulo = $('#postTitle').val();
     post.conteudo = $('#postContent').val();
+    post.idGrupo = $('#postGroup').val();
 
     $http.post('http://localhost:1337/post/create', post).then(function(response) {
       if(response.data.sucesso)
@@ -108,13 +195,6 @@ myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
    });
 
   }
-
-
-
-}]);
-
-myApp.controller('groupController', ['$scope', '$http', function($scope, $http) {
-  $scope.group = {nome: 'Azralon'};
 
 }]);
 
@@ -216,42 +296,9 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
 
 
 
-myApp.controller('myGroupController', ['$scope', '$http', function($scope, $http) {
-  $scope.groups = {};
-  /*[
-  {
-    nome: 'LFG mitica ilvl 630 dps', 
-  },
-  {
-    nome: 'LFM world boss lvl 90+', 
-  },
-  {
-    nome: '[Blacksmithing] LFW 10g/e', 
-  },
-  {
-    nome: 'Buy all of your draenor ores 100g/stack COD me'
-  }
-  ];*/
-
-  $scope.loadGroups = function(){
-
-  }
-
-  $scope.group = {member: false};
-
-  $scope.join = function(){
-    $scope.group.member = true;
-  }
-
-  $scope.leave = function(){
-    $scope.group.member = false;
-  }
-
-}]);
-
 myApp.controller('allUsersController', ['$scope', '$http', function($scope, $http) {
-  $scope.allusers = 
-  [
+  $scope.allusers = {};
+  /*[
   {
     usuario: 'patodomau', 
     nome: 'Tales Prates Correia',
@@ -268,7 +315,11 @@ myApp.controller('allUsersController', ['$scope', '$http', function($scope, $htt
     data: '1992-04-15',
     followed: true
   }
-  ];
+  ];*/
+
+  $scope.loadUsers = function(){
+
+  }
 
   $scope.follow = function(index){
     $scope.allusers[index].followed = true;

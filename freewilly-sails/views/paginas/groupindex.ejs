@@ -26,32 +26,65 @@
     <%- include navbar.ejs %>
     <div class="row">
 
-        <div ng-controller="indexController" ng-init="loadUser()" style="margin-top: 100px;" class="container">
-          <div class="well col-md-6">
-              <div class="media">
-                <a class="pull-left" ng-href="http://localhost:1337/freewilly/index?username={{usuario.usuario}}">
-                    <img ng-src="/avatar/{{usuario.foto}}" class="img-circle" height="100" width="100">
-                </a>
-                <div class="media-body">
-                    <h2 class="media-heading">{{usuario.usuario}}</h2>
-                    <p class="text-left">{{usuario.nome}}</p>
-                    <p>{{usuario.descricao}}</p>
-                    <ul class="list-inline list-unstyled">
-                        <li ng-show="post.followed">
-                            <button ng-click="unfollow($index)" class="btn btn-success btn-block"> Following </button>
-                        </li>
+        <div ng-controller="groupIndexController" ng-init="loadGroup()" style="margin-top: 100px;" class="container">
+            <div class="col-md-8">
+              <div class="panel panel-info" style="position: relative; top: 20px; opacity: 0.85;">
+                <div class="panel-heading clearfix">
+                  <div class="panel-title">Group Index
+                    <div class="pull-right">
+                      <button ng-click="removeGroup();" class="btn btn-danger btn-sm">Terminate Group</button>
+                  </div>
+              </div>
 
-                        <li ng-hide="post.followed">
-                            <button ng-click="follow($index)" class="btn btn-info btn-block"> Follow </button>
-                        </li>
-                    </ul>
 
+          </div>     
+
+          <div style="padding-top:30px" class="panel-body">
+
+              <!-- -->
+              <form class="form-horizontal" action="" method="post">
+
+
+
+                <!-- Name input-->
+                <fieldset class="form-group">
+                  <label class="col-md-2 control-label" for="groupName">Group Name</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" id="groupName" ng-value="group.nome">
                 </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label class="col-md-2 control-label" for="groupDescription">Description</label>
+              <div class="col-md-8">
+                <textarea class="form-control" id="groupDescription" name="groupDescription" rows="5">{{group.descricao}}</textarea>
             </div>
-        </div>
+        </fieldset>
+
+        <button ng-click="updateGroup()" type="submit" class="btn btn-success pull-right">Update</button>
+    </form>     
+</div>                    
+</div> 
+</div>
+<div ng-controller="groupMemberList" ng-init="loadMembers();"class="col-md-4" style="margin-top: 20px;">
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Group Members</h3>
+        
     </div>
+    <ul class="list-group">
+        <a ng-repeat="member in members" ng-href="/freewilly/index?username={{member.usuario}}" class="list-group-item">{{member.usuario}}</a>
+        <a href="group" class=" btn btn-block btn-success">Add member</a>
+
+    </ul>
+</div>
 
 </div>
+
+</div>
+
 
 <!-- Page Content -->
 <!-- /.container -->

@@ -11,7 +11,13 @@ module.exports = {
 		Post.query(query, function (error, result) {
 
 			if(error) {
+<<<<<<< Updated upstream
 				return response({sucesso: false});
+=======
+				console.log(result);
+				//result.sucesso = false;
+				return response(result);
+>>>>>>> Stashed changes
 			}
 
 			else {

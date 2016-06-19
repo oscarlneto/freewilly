@@ -22,5 +22,14 @@ module.exports={
 	},
 	profile: function (req, res) {
 		res.view('paginas/profile', {cwd: 'spicty'});
+	},
+	newpost: function (req, res) {
+		res.view('paginas/newpost', {cwd: 'spicty'});
+	},
+	newgroup: function (req, res) {
+		res.view('paginas/newgroup', {cwd: 'spicty'});
+	},
+	groupindex: function (req, res) {
+		res.view('paginas/groupindex', {cwd: 'spicty'});
 	}
 };

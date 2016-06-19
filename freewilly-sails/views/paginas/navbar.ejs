@@ -9,13 +9,13 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/freewilly/index">FreeWilly</a>
+			<a class="navbar-brand" ng-href="/freewilly/index?username={{login.usuario}}">FreeWilly</a>
 		</div>
 		<div ng-show="login.autenticou" class="navbar-header pull-right">
 			
 			<p class="navbar-text">
 				Wellcome, {{login.usuario}}
-				<a href="http://localhost:1337/freewilly/login" ng-click="logout()" class="navbar-link glyphicon glyphicon-off" title="log off"></a>
+				<a href="/freewilly/login" ng-click="logout()" class="navbar-link glyphicon glyphicon-off" title="log off"></a>
 			</p>  
 		</div>
 
@@ -31,6 +31,13 @@
 				<li ng-show="login.autenticou">
 					<a href="/freewilly/profile">Profile</a>
 				</li>
+				<li class="dropdown">
+					<a href="#" data-toggle="dropdown" class="dropdown-toggle">New <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="/freewilly/newpost">Post</a></li>
+						<li><a href="/freewilly/newgroup">Group</a></li>
+					</ul>
+				</li>
 				<li>
 					<a href="/freewilly/users">Users</a>
 				</li>
@@ -38,9 +45,8 @@
 					<a href="/freewilly/about">About</a>
 				</li>
 
-				<li>
-					<a href="/freewilly/about">{{login.autenticou}}</a>
-				</li>
+
+
 
 			</ul>
 		</div>
