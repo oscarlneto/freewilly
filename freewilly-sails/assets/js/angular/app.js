@@ -298,27 +298,14 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
 
 myApp.controller('allUsersController', ['$scope', '$http', function($scope, $http) {
   $scope.allusers = {};
-  /*[
-  {
-    usuario: 'patodomau', 
-    nome: 'Tales Prates Correia',
-    descricao: 'alguma coisa ai',
-    data: '1992-04-14',
-    avatar: 'thrall.png',
-    followed: false
-  },
-  {
-    usuario: 'patodomaui', 
-    nome: 'Tales Prates Correia2',
-    descricao: 'tchau mundo',
-    avatar: 'malfurion.png',
-    data: '1992-04-15',
-    followed: true
-  }
-  ];*/
 
   $scope.loadUsers = function(){
 
+    var usuario = {usuario: sessionStorage.getItem("usuario")};
+
+    $http.post('http://localhost:1337/usuario/getAll', usuario).then(function(response) {
+      $scope.allusers = response.data.rows;
+   });
   }
 
   $scope.follow = function(index){

@@ -84,5 +84,23 @@ module.exports = {
 				return response(result);
 			}
 		});
+	},
+
+	selectByIdGrupoUsuario: function(request, response) {
+
+		var query = "SELECT * FROM GrupoUsuarios WHERE idGrupo = "+request.idGrupo 
+						+" AND usuario = "+GrupoUsuarios.setMarks(request.usuario)+";";
+
+		GrupoUsuarios.query(query, function (error, result) {
+
+			if(error || result.rowCount == 0) {
+				return response({sucesso: false});
+			}
+
+			else {
+				result.sucesso = true;
+				return response(result);
+			}
+		});
 	}
 }
