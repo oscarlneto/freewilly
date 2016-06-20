@@ -25,6 +25,8 @@ Open FIREFOX and type:
 
 `localhost:1337/freewilly/login`
 
+You can populate 
+
 ## Error checklist
 
 Use this to look for errors.
