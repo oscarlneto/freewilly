@@ -1,0 +1,73 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-example8-production</title>
+  
+
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/css/external.css"/>
+</head>
+
+
+
+<body ng-app="spicyApp1" background="/background.jpg">
+ <%- include navbar.ejs %>
+
+ <div class="container">   
+   <div class="row"> 
+    <div ng-controller="updatePostController" ng-init="loadPost()" id="newPostBox" style="margin-top:50px;" class="col-md-8">                    
+      <div class="panel panel-info" style="position: relative; top: 20px; opacity: 0.85;">
+        <div class="panel-heading clearfix">
+          <div class="panel-title">Update Post
+          <div class="pull-right">
+              <button ng-click="removePost();" class="btn btn-danger btn-sm">Remove Post</button>
+            </div>
+          </div>
+
+
+        </div>     
+
+        <div style="padding-top:30px" class="panel-body">
+
+          <!-- -->
+          <form class="form-horizontal" action="" method="post">
+
+
+
+            <!-- Name input-->
+            <fieldset class="form-group">
+              <label class="col-md-2 control-label" for="postTitle">Title</label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" id="postTitle" ng-value="post.titulo" minlength="1" maxlength="30"  
+                title="1 to 30 characters" placeholder="post title">
+              </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label class="col-md-2 control-label" for="postContent">Message</label>
+              <div class="col-md-8">
+                <textarea class="form-control" id="postContent" ng-value="post.conteudo" maxlength="300"  title="0 to 300 characters" name="postContent" rows="5"></textarea>
+              </div>
+            </fieldset>
+
+         <button ng-click="updatePost()" type="button" class="btn btn-primary">Update</button>
+       </form>     
+     </div>                     
+   </div>  
+ </div>
+</div>
+
+
+
+
+
+
+</div>
+
+</div>
+
+
+
+</body>
+

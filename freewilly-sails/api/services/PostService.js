@@ -97,9 +97,12 @@ module.exports = {
 
 	selectByGrupo: function(request, response) {
 
-		var query = "SELECT Post.idPost, Post.usuario, Post.titulo, Post.conteudo, Post.data, Usuario.foto "
+		var query = "SELECT Post.idPost, Post.usuario, Post.titulo, Post.conteudo, Post.data, Usuario.foto, "
+						+"PostReacao.reacao, PostReacao.compartilhou "
 						+"FROM Post JOIN Usuario ON Post.usuario = Usuario.usuario "
-						+"WHERE Post.idGrupo = "+request.idGrupo+" ORDER BY data DESC;";
+						+"LEFT JOIN PostReacao ON Post.idPost = PostReacao.idPost "
+						+"WHERE (PostReacao.usuario = "+Post.setMarks(request.usuario)+" OR PostReacao.usuario IS NULL) "
+						+"AND Post.idGrupo = "+request.idGrupo+" ORDER BY data DESC;";
 
 		Post.query(query, function (error, result) {
 
@@ -118,10 +121,13 @@ module.exports = {
 
 	selectByUsuarioFollow: function(request, response) {
 
-		var query = "SELECT Post.idPost, Post.usuario, Post.titulo, Post.conteudo, Post.data, Usuario.foto "
-						+"FROM Post JOIN Follow ON Post.usuario = Follow.follow "
-						+"JOIN Usuario ON Post.usuario = Usuario.usuario "
-						+"WHERE Follow.usuario = "+Post.setMarks(request.usuario)+" ORDER BY Post.data DESC;";
+		var query = "SELECT Post.idPost, Post.usuario, Post.titulo, Post.conteudo, Post.data, Usuario.foto, "
+						+"PostReacao.reacao, PostReacao.compartilhou "
+						+"FROM Post JOIN Usuario ON Post.usuario = Usuario.usuario "
+						+"LEFT JOIN PostReacao ON Post.idPost = PostReacao.idPost "
+						+"JOIN Follow ON Post.usuario = Follow.follow "
+						+"WHERE (PostReacao.usuario = "+Post.setMarks(request.usuario)+" OR PostReacao.usuario IS NULL) "
+						+"AND Follow.usuario = "+Post.setMarks(request.usuario)+" ORDER BY Post.data DESC;";
 
 		Post.query(query, function (error, result) {
 

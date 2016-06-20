@@ -54,6 +54,16 @@ module.exports = {
 		});
 	},
 
+	getAll: function (request, response) {
+
+		var grupo = {};
+		grupo.usuario =  Grupo.setUndefined(request.param('usuario'));
+
+		GrupoService.selectAll(grupo, function (result) {
+			response.json(result);
+		});
+	},
+
 	getByUsuario: function (request, response) {
 
 		var grupo = {};

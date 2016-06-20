@@ -72,6 +72,23 @@ module.exports = {
 		});
 	},
 
+	selectAll: function(request, response) {
+
+		var query = "SELECT * FROM Grupo;";
+
+		Grupo.query(query, function (error, result) {
+
+			if(error || result.rowCount == 0) {
+				return response({sucesso: false});
+			}
+
+			else {
+				result.sucesso = true;
+				return response(result);
+			}
+		});
+	},
+
 	selectByUsuario: function(request, response) {
 
 		var query = "SELECT * FROM Grupo WHERE usuario = "+Grupo.setMarks(request.usuario)+";";
