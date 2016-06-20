@@ -21,8 +21,6 @@ module.exports = {
 		post.titulo = Post.setUndefined(request.param('titulo'));
 		post.conteudo = Post.setUndefined(request.param('conteudo'));
 		post.idGrupo = Post.setUndefined(request.param('idGrupo'));
-
-		console.log(post);
 		
 		PostService.insert(post, function (result) {
 			response.json(result);
