@@ -50,14 +50,14 @@
               <fieldset class="form-group">
                 <label class="col-md-2 control-label" for="groupName">Group Name</label>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" id="groupName" ng-value="group.nome">
+                  <input type="text" class="form-control" id="groupName" required  minlength="2" maxlength="20" title="1 to 20 characters" ng-value="group.nome">
                 </div>
               </fieldset>
 
               <fieldset class="form-group">
                 <label class="col-md-2 control-label" for="groupDescription">Description</label>
                 <div class="col-md-8">
-                  <textarea class="form-control" id="groupDescription" name="groupDescription" rows="5">{{group.descricao}}</textarea>
+                  <textarea class="form-control" id="groupDescription" name="groupDescription" maxlength="200"  title="0 to 200 characters" rows="5">{{group.descricao}}</textarea>
                 </div>
               </fieldset>
 
@@ -96,11 +96,16 @@
 
             </div>
             <ul class="list-group">
+<<<<<<< Updated upstream
               <a ng-repeat="member in members" ng-href="/freewilly/user?username={{member.usuario}}" class="list-group-item">{{member.usuario}}</a>
+=======
+              <!--<a ng-href="/freewilly/index?username={{admin}}" class="list-group-item">{{admin}}</a>-->
+              <a ng-repeat="member in members" ng-href="/freewilly/index?username={{member.usuario}}" class="list-group-item">{{member.usuario}}</a>
+>>>>>>> Stashed changes
               <button ng-show="addButton" ng-click="showForm()" class=" btn btn-block btn-success">Add member</button>
 
               <div ng-hide="addButton" class="input-group" >
-                <input id="newMemberUsername" type="text" class="form-control" placeholder="new member username">
+                <input id="newMemberUsername" type="text" class="form-control" required minlength="4" maxlength="10" pattern="[A-Za-z]{4, 10}"  title="4 to 10 characters" placeholder="new member username">
                 <span class="input-group-btn">
                   <button ng-click="addMember(); hideForm();" class="btn btn-default" type="button">Add</button>
                 </span>

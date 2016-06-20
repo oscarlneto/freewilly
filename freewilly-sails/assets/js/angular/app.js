@@ -173,8 +173,9 @@ myApp.controller('groupPostController', ['$scope', '$http', function($scope, $ht
 }]);
 
 myApp.controller('groupMemberList', ['$scope', '$http', function($scope, $http) {
-  $scope.members= {};
+  $scope.members = {};
   $scope.addButton = true;
+  $scope.admin = {};
 
   $scope.loadMembers = function(){
 
@@ -190,6 +191,15 @@ myApp.controller('groupMemberList', ['$scope', '$http', function($scope, $http) 
       }
     });
 
+    $http.post('http://localhost:1337/GrupoUsuarios/getByIdGrupo', grupo).then(function(response) {
+
+      if(response.data.sucesso == true)
+      {
+        $scope.admin = response.data.rows[0].usuario;
+      }
+    });
+
+
   }
 
   $scope.addMember = function(){
@@ -199,9 +209,9 @@ myApp.controller('groupMemberList', ['$scope', '$http', function($scope, $http) 
     grupoUsuarios.idGrupo = getParameterByName('group');
 
     $http.post('http://localhost:1337/grupoUsuarios/create', grupoUsuarios).then(function(response) {
-      
+
         //$scope.members.push({usuario: grupoUsuarios.nome});
-    });
+      });
 
 
   }
@@ -417,7 +427,7 @@ myApp.controller('allUsersController', ['$scope', '$http', function($scope, $htt
 
     $http.post('http://localhost:1337/usuario/getAll', usuario).then(function(response) {
       $scope.allusers = response.data.rows;
-   });
+    });
   }
 
   $scope.follow = function(index){

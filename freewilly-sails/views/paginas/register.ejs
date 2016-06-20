@@ -28,7 +28,7 @@
         <!-- -->
         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-        <div
+        
 
         <form class="form-horizontal" action="" method="post">
 
@@ -38,28 +38,28 @@
           <div class="form-group">
             <label class="col-md-3 control-label" for="name">Name</label>
             <div class="col-md-9">
-              <input id="name" name="name" type="text" required placeholder="Your name" class="form-control">
+              <input id="name" name="name" type="text" required placeholder="Your name" minlength="4" maxlength="30"  pattern="[A-Za-z\s]{4,30}" title="4 to 30 characters" class="form-control">
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-md-3 control-label" for="login">Login</label>
             <div class="col-md-9">
-              <input id="login" name="login" type="text" required placeholder="Your login" class="form-control">
+              <input id="login" name="login" type="text" required placeholder="Your login" minlength="4" maxlength="20" pattern="[A-Za-z]{4,10}" title="4 to 10 characters" class="form-control">
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-md-3 control-label" for="password">Password</label>
             <div class="col-md-9">
-              <input id="password" required name="password" type="password" class="form-control">
+              <input id="password" required name="password" pattern=".{4,}" type="password" class="form-control">
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-md-3 control-label" for="date">Birthday</label>
             <div class="col-md-9">
-              <input id="date" name="date" type="text" placeholder="14/04/1992" class="form-control">
+              <input id="date" name="date" type="text" placeholder="14/04/1992" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" title="DD/MM/AAAA date format" class="form-control">
             </div>
           </div>
           <!--login, senha, nome de exibição, foto, descrição e data de nascimento.-->
@@ -68,7 +68,7 @@
           <div class="form-group">
             <label class="col-md-3 control-label" for="description">Description</label>
             <div class="col-md-9">
-              <textarea class="form-control" id="description" name="description" placeholder="Please enter your description here..." rows="5"></textarea>
+              <textarea class="form-control" id="description" name="description" maxlength="300"  title="0 to 300 characters" placeholder="Please enter your description here..." rows="5"></textarea>
             </div>
           </div>
           <div class="form-group">
@@ -96,7 +96,7 @@
        <!-- Form actions -->
        <div class="form-group">
         <div class="col-md-12 text-right">
-          <button id="btn-login" ng-click="createUser()" class="btn btn-success">Sign Up</button>
+          <button id="btn-login" type="button" ng-click="createUser()" class="btn btn-success">Sign Up {{form.input.valid}}</button>
         </div>
       </div>
 

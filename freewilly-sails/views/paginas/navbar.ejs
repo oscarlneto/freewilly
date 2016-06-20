@@ -31,7 +31,7 @@
 				<li ng-show="login.autenticou">
 					<a href="/freewilly/profile">Profile</a>
 				</li>
-				<li class="dropdown">
+				<li ng-show="login.autenticou" class="dropdown">
 					<a href="#" data-toggle="dropdown" class="dropdown-toggle">New <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="/freewilly/newpost">Post</a></li>

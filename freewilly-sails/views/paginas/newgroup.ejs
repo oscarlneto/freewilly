@@ -36,18 +36,18 @@
             <fieldset class="form-group">
               <label class="col-md-2 control-label" for="groupName">Group Name</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="groupName" placeholder="group name">
+                <input type="text" class="form-control" id="groupName" required minlength="2" maxlength="20" title="2 to 20 characters" placeholder="group name">
               </div>
             </fieldset>
 
             <fieldset class="form-group">
               <label class="col-md-2 control-label" for="groupDescription">Description</label>
               <div class="col-md-8">
-                <textarea class="form-control" id="groupDescription" name="groupDescription" rows="5"></textarea>
+                <textarea class="form-control" id="groupDescription" maxlength="200" title="1 to 200 characters" name="groupDescription" rows="5"></textarea>
               </div>
             </fieldset>
 
-         <button ng-click="createGroup()" type="submit" class="btn btn-primary">Create</button>
+         <button ng-click="createGroup()" type="button" class="btn btn-primary">Create</button>
        </form>     
      </div>                    
    </div>  
