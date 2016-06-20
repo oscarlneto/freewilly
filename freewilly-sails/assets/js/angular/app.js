@@ -84,6 +84,7 @@ myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
 
 myApp.controller('groupIndexController', ['$scope', '$http', function($scope, $http) {
   $scope.group = {};
+  $scope.admin = false;
 
   $scope.loadGroup = function(){
 
@@ -97,8 +98,12 @@ myApp.controller('groupIndexController', ['$scope', '$http', function($scope, $h
       {
         console.log('rf ' + response.data);
         $scope.group = response.data.rows[0];
+        if(response.data.rows[0].usuario == sessionStorage.getItem('usuario'))
+          $scope.admin = true;
       }
     });
+
+
 
   }
 
@@ -117,11 +122,51 @@ myApp.controller('groupIndexController', ['$scope', '$http', function($scope, $h
 
   }
 
+  $scope.updateGroup = function(){
+    var group = {};
+
+    group.usuario = sessionStorage.getItem('usuario');
+    group.nome = $('#groupName').val();
+    group.foto = 'thrall.png';
+    group.descricao = $('#groupDescription').val();
+    group.idGrupo = getParameterByName('group');
+
+    $http.post('http://localhost:1337/Grupo/set', group).then(function(response) {
+      if(response.data.sucesso)
+        console.log(response.data.sucesso);
+    });
+
+  }
+
+
+}]);
+
+myApp.controller('groupPostController', ['$scope', '$http', function($scope, $http) {
+  $scope.posts = {};
+
+  $scope.loadPosts = function(){
+
+    var grupo = {};
+
+    grupo.idGrupo = getParameterByName('group');
+
+    $http.post('http://localhost:1337/post/getByGrupo', grupo).then(function(response) {
+      console.log(response.data.sucesso + "rf");
+      if(response.data.sucesso == true)
+      {
+        $scope.posts = response.data.rows;
+      }
+    });
+
+
+
+  }
 
 }]);
 
 myApp.controller('groupMemberList', ['$scope', '$http', function($scope, $http) {
   $scope.members= {};
+  $scope.addButton = true;
 
   $scope.loadMembers = function(){
 
@@ -138,6 +183,29 @@ myApp.controller('groupMemberList', ['$scope', '$http', function($scope, $http) 
     });
 
   }
+
+  $scope.addMember = function(){
+    var grupoUsuarios = {};
+
+    grupoUsuarios.usuario = $('#newMemberUsername').val();
+    grupoUsuarios.idGrupo = getParameterByName('group');
+
+    $http.post('http://localhost:1337/grupoUsuarios/create', grupoUsuarios).then(function(response) {
+      
+        //$scope.members.push({usuario: grupoUsuarios.nome});
+    });
+
+
+  }
+
+  $scope.showForm = function(){
+    $scope.addButton = false;
+  }
+
+  $scope.hideForm = function(){
+    $scope.addButton = true;
+  }
+
 
 }]);
 
@@ -163,7 +231,7 @@ myApp.controller('newGroupController', ['$scope', '$http', function($scope, $htt
 }]);
 
 
-myApp.controller('newPostController', ['$scope', '$http', function($scope, $http) {
+myApp.controller('newPostController', ['$scope', '$http', '$window', function($scope, $http, $window) {
   $scope.inGroup = '';
   $scope.myGroups = {};
 
@@ -179,8 +247,6 @@ myApp.controller('newPostController', ['$scope', '$http', function($scope, $http
 
   }
 
-
-
   $scope.createPost = function(){
     var post = {};
 
@@ -189,12 +255,15 @@ myApp.controller('newPostController', ['$scope', '$http', function($scope, $http
     post.conteudo = $('#postContent').val();
     post.idGrupo = $('#postGroup').val();
 
+    console.log(post);
+
     $http.post('http://localhost:1337/post/create', post).then(function(response) {
       if(response.data.sucesso)
        $window.location.href = 'http://localhost:1337/freewilly/profile';
    });
 
   }
+
 
 }]);
 
@@ -318,6 +387,12 @@ myApp.controller('allUsersController', ['$scope', '$http', function($scope, $htt
   ];*/
 
   $scope.loadUsers = function(){
+    var usuario = {};
+
+    $http.post('http://localhost:1337/usuario/getAll', usuario).then(function(response) {
+      if(response.data.sucesso)
+       $scope.allusers = response.data.rows;
+   });
 
   }
 

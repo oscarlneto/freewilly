@@ -11,10 +11,6 @@ module.exports = {
 		Post.query(query, function (error, result) {
 
 			if(error) {
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 				return response({sucesso: false});
 			}
 

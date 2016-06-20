@@ -58,6 +58,7 @@ module.exports = {
 	},
 
 	getAll: function (request, response) {
+		var usuario = {};
 
 		UsuarioService.selectAll(usuario, function (result) {
 			response.json(result);

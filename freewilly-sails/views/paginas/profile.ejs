@@ -123,7 +123,7 @@
         </a>
         <div class="media-body">
           <h4 class="media-heading">{{post.titulo}}</h4>
-          <p class="text-left">{{post.usuario}}</p>
+          <p class="text-left"><a ng-href="/frewilly/index?username={{post.usuario}}">{{post.usuario}}</a></p>
           <p>{{post.conteudo}}</p>
           <ul class="list-inline list-unstyled">
             <li><span><i class="glyphicon glyphicon-calendar"></i> {{post.data}} </span></li>
@@ -151,7 +151,7 @@
           </div>
           <ul class="list-group">
             <a ng-repeat="group in groups" ng-href="/freewilly/groupindex?group={{group.idgrupo}}" class="list-group-item">{{group.nome}}</a>
-            <a href="group" class=" btn btn-block btn-success">New group</a>
+            <a href="/freewilly/newgroup" class=" btn btn-block btn-success">New group</a>
 
           </ul>
         </div>
