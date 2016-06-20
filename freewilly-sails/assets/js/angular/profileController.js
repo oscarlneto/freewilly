@@ -6,7 +6,6 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
     var usuario = {usuario: sessionStorage.getItem("usuario")};
     $http.post("http://localhost:1337/usuario/get", usuario).then(function(response) {
       $scope.usuario = response.data.rows[0];
-      console.log($scope.usuario);
     });
   }
 
@@ -44,7 +43,6 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
     usuario.foto = $('#avatar').val();
     usuario.descricao = $('#description').val();
 
-    console.log(usuario.aniversario);
 
     $http.post('http://localhost:1337/usuario/set', usuario).then(function(response) {
       if(response.data.sucesso)
@@ -71,7 +69,6 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
 
     $http.post("http://localhost:1337/follow/create", usuario).then(function(response) {
       if(response.data.sucesso == true){
-        console.log(response.data.sucesso);
         $scope.following = true;
       }
     });
@@ -86,7 +83,6 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
 
     $http.post("http://localhost:1337/follow/remove", usuario).then(function(response) {
       if(response.data.sucesso == true){
-        console.log(response.data.sucesso);
         $scope.following = false;
       }
     });
