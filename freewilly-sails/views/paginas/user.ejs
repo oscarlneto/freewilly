@@ -29,7 +29,7 @@
         <div ng-controller="indexController" ng-init="loadUser()" style="margin-top: 100px;" class="container">
           <div class="well col-md-6">
               <div class="media">
-                <a class="pull-left" ng-href="http://localhost:1337/freewilly/user?username={{usuario.usuario}}">
+                <a class="pull-left" ng-href="/freewilly/user?username={{usuario.usuario}}">
                     <img ng-src="/avatar/{{usuario.foto}}" class="img-circle" height="100" width="100">
                 </a>
                 <div class="media-body">
@@ -56,30 +56,63 @@
 <!-- Page Content -->
 <!-- /.container -->
 
-<div ng-controller="postController" ng-init="loadUserPosts()" class="container">
-  <div ng-repeat="post in posts" class="well">
+<div ng-controller="groupListController" ng-init="loadUserGroups();" class="col-md-4" style="margin-top: 70px;">
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        My Groups</h3>
+      </div>
+      <ul class="list-group">
+        <a ng-repeat="group in groups" ng-href="/freewilly/groupindex?group={{group.idgrupo}}" class="list-group-item">{{group.nome}}</a>
+
+      </ul>
+    </div>
+
+  </div>
+
+<div ng-controller="postController" ng-init="loadUserPosts();" class="col-md-8" style="margin-top: 20px;">
+    <div ng-repeat="post in posts" class="well bgimg">
       <div  class="media">
         <a class="pull-left" href="#">
-            <img ng-src="/avatar/{{post.foto}}" class="img-circle" height="125" width="125">
+          <img ng-src="/avatar/{{post.foto}}" class="img-circle" height="125" width="125">
         </a>
         <div class="media-body">
-            <h4 class="media-heading">{{post.titulo}}</h4>
-            <p class="text-left">{{post.usuario}}</p>
-            <p>{{post.conteudo}}</p>
-            <ul class="list-inline list-unstyled">
-                <li><span><i class="glyphicon glyphicon-calendar"></i> {{post.data}} </span></li>
-                <li>|</li>
-                <li ng-show="post.liked"><span><button class="btn btn-info btn-sm">Liked</button></span></li>
-                <li ng-hide="post.liked"><span><button class="btn btn-info btn-sm">Like</button></span></li>
-                <li>|</li>
-                <li ng-show="post.shared"><span><button class="btn btn-info btn-sm">Shared</button></span></li>
-                <li ng-hide="post.shared"><span><button class="btn btn-info btn-sm">Share</button></span></li>
-                <li>|</li>
+          <h4 class="media-heading">{{post.titulo}}</h4>
+          <p class="text-left"><a ng-href="/frewilly/user?username={{post.usuario}}">{{post.usuario}}</a></p>
+          <p>{{post.conteudo}}</p>
+          <ul class="list-inline list-unstyled">
+            <li><span><i class="glyphicon glyphicon-calendar"></i> {{post.data}} </span></li>
+            <li>|</li>
+            <li ng-show="post.liked"><span><button class="btn btn-info btn-sm">Liked</button></span></li>
+            <li ng-hide="post.liked"><span><button class="btn btn-info btn-sm">Like</button></span></li>
+            <li>|</li>
+            <li ng-show="post.shared"><span><button class="btn btn-info btn-sm">Shared</button></span></li>
+            <li ng-hide="post.shared"><span><button class="btn btn-info btn-sm">Share</button></span></li>
+            <li>|</li>
 
-            </div>
+          </div>
 
         </div>
+      </div>
+
     </div>
+
+    <div ng-controller="myGroupsListController" ng-init="loadUserGroups();"class="col-md-4" style="margin-top: 20px;">
+
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            Groups I Own</h3>
+          </div>
+          <ul class="list-group">
+            <a ng-repeat="group in groups" ng-href="/freewilly/groupindex?group={{group.idgrupo}}" class="list-group-item">{{group.nome}}</a>
+            <a href="/freewilly/newgroup" class=" btn btn-block btn-success">New group</a>
+
+          </ul>
+        </div>
+
+      </div>
 </div>
 
 </body>
