@@ -24,63 +24,67 @@
 <body ng-app="spicyApp1" background="/background.jpg">
 
     <%- include navbar.ejs %>
-    <div class="row">
+    <div class="container" style="margin-top: 50px;">
+        <div class="row">
+            <div ng-controller="indexController" ng-init="loadUser();" class="col-md-6" style="margin-top: 20px;">
+                <div class="well orc">
+                  <div  class="media">
+                    <a class="pull-left" href="#">
+                      <img ng-src="/avatar/{{usuario.foto}}" class="img-circle" height="125" width="125">
+                  </a>
+                  <div class="media-body">
+                      <h4 class="media-heading">{{usuario.usuario}}</h4>
+                      <p class="text-left"><a ng-href="/frewilly/user?username={{usuario.usuario}}">{{usuario.nome}}</a></p>
+                      <p>{{usuario.descricao}}</p>
+                  </div>
 
-        <div ng-controller="indexController" ng-init="loadUser()" style="margin-top: 100px;" class="container">
-          <div class="well col-md-6">
-              <div class="media">
-                <a class="pull-left" ng-href="http://localhost:1337/freewilly/index?username={{usuario.usuario}}">
-                    <img ng-src="/avatar/{{usuario.foto}}" class="img-circle" height="100" width="100">
-                </a>
-                <div class="media-body">
-                    <h2 class="media-heading">{{usuario.usuario}}</h2>
-                    <p class="text-left">{{usuario.nome}}</p>
-                    <p>{{usuario.descricao}}</p>
-                    <ul class="list-inline list-unstyled">
-                        <li ng-show="post.followed">
-                            <button ng-click="unfollow($index)" class="btn btn-success btn-block"> Following </button>
-                        </li>
+              </div>
+          </div>
+      </div>
+      <div ng-controller="postController" ng-init="loadPosts();" class="col-md-8" style="margin-top: 20px;">
+        <div ng-repeat="post in posts" class="well bgimg">
+          <div  class="media">
+            <a class="pull-left" href="#">
+              <img ng-src="/avatar/{{post.foto}}" class="img-circle" height="125" width="125">
+          </a>
+          <div class="media-body">
+              <h4 class="media-heading">{{post.titulo}}</h4>
+              <p class="text-left"><a ng-href="/frewilly/user?username={{post.usuario}}">{{post.usuario}}</a></p>
+              <p>{{post.conteudo}}</p>
+              <ul class="list-inline list-unstyled">
+                <li><span><i class="glyphicon glyphicon-calendar"></i> {{post.data}} </span></li>
+                <li>|</li>
+                <li ng-show="post.reacao == 1 || false"><span><button ng-click="unlike($index)" class="btn btn-success btn-sm">Liked</button></span></li>
+                <li ng-show="post.reacao == 0 || !post.reacao"><span><button ng-click="like($index)" class="btn btn-info btn-sm">Like</button></span></li>
+                <li>|</li>
+                <li ng-show="post.compartilhou || false"><span><button class="btn btn-success btn-sm">Shared</button></span></li>
+                <li ng-hide="post.compartilhou || false"><span><button ng-click="share($index)" class="btn btn-info btn-sm">Share</button></span></li>
+                <li>|</li>
 
-                        <li ng-hide="post.followed">
-                            <button ng-click="follow($index)" class="btn btn-info btn-block"> Follow </button>
-                        </li>
-                    </ul>
-
-                </div>
             </div>
+
         </div>
     </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+</div>
+</div>
 
 </div>
 
 <!-- Page Content -->
 <!-- /.container -->
 
-<div ng-controller="postController" ng-init="loadPosts()" class="container">
-  <div ng-repeat="post in posts" class="well">
-      <div  class="media">
-        <a class="pull-left" href="#">
-            <img ng-src="/avatar/{{post.foto}}" class="img-circle" height="125" width="125">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading">{{post.titulo}}</h4>
-            <p class="text-left">{{post.usuario}}</p>
-            <p>{{post.conteudo}}</p>
-            <ul class="list-inline list-unstyled">
-                <li><span><i class="glyphicon glyphicon-calendar"></i> {{post.data}} </span></li>
-                <li>|</li>
-                <li ng-show="post.liked"><span><button class="btn btn-info btn-sm">Liked</button></span></li>
-                <li ng-hide="post.liked"><span><button class="btn btn-info btn-sm">Like</button></span></li>
-                <li>|</li>
-                <li ng-show="post.shared"><span><button class="btn btn-info btn-sm">Shared</button></span></li>
-                <li ng-hide="post.shared"><span><button class="btn btn-info btn-sm">Share</button></span></li>
-                <li>|</li>
 
-            </div>
-
-        </div>
-    </div>
-</div>
 
 </body>
 

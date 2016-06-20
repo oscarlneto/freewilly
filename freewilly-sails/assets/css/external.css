@@ -23,6 +23,12 @@ body{
 	color: white;
 }
 
+.orc{
+	background-image: url('/banner/background_panel.jpg');
+	background-size: 100% auto;
+	color: white;
+}
+
 input:invalid{
 	background-color: #F45254
 }

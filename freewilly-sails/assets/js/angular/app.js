@@ -86,10 +86,9 @@ myApp.controller('myPostsController', ['$scope', '$http', function($scope, $http
 
     var post = {};
     post.usuario = sessionStorage.getItem('usuario');
-    //post.titulo = ($scope.posts[index].titulo).concat("shared from <a href=/freewilly/user?username=", $scope.posts[index].usuario, ">",  $scope.posts[index].usuario, "</a>");
     post.titulo = $scope.posts[index].titulo;
     post.conteudo = $scope.posts[index].conteudo + " (shared from @" + $scope.posts[index].usuario + ")";
-
+    
     $http.post("http://localhost:1337/post/create", post).then(function(response) {
       if(response.data.sucesso)
         console.log('compartilhado');
@@ -120,11 +119,75 @@ myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
   $scope.posts = {};
 
   $scope.like = function(index){
-    $scope.posts[index].liked = true;
+    $scope.posts[index].reacao = 1;
+
+    var postReacao = {};
+
+    postReacao.idPost = $scope.posts[index].idpost;
+    postReacao.usuario = sessionStorage.getItem('usuario');
+    postReacao.reacao = 1;
+    postReacao.compartilhou = $scope.posts[index].compartilhou;
+
+    $http.post("http://localhost:1337/postreacao/create", postReacao).then(function(response) {
+      if(response.data.sucesso){
+        console.log('sucesso');
+      } else {
+        $http.post("http://localhost:1337/postreacao/set", postReacao).then(function(res) {
+          if(res.data.sucesso)
+            console.log('sucesso no set');
+        });
+      }
+    });
+
   }
 
   $scope.unlike = function(index){
-    $scope.posts[index].liked = false;
+    $scope.posts[index].reacao = 0;
+
+    var postReacao = {};
+
+    postReacao.idPost = $scope.posts[index].idpost;
+    postReacao.usuario = sessionStorage.getItem('usuario');
+    postReacao.reacao = 0;
+    postReacao.compartilhou = $scope.posts[index].compartilhou;
+
+    $http.post("http://localhost:1337/postreacao/set", postReacao).then(function(response) {
+      if(response.data.sucesso)
+        console.log('sucesso');
+    });
+
+  }
+
+  $scope.share = function(index){
+    $scope.posts[index].compartilhou = true;
+
+    var postReacao = {};
+
+    postReacao.idPost = $scope.posts[index].idpost;
+    postReacao.usuario = sessionStorage.getItem('usuario');
+    postReacao.reacao = $scope.posts[index].reacao;
+    postReacao.compartilhou = true;
+
+    $http.post("http://localhost:1337/postreacao/create", postReacao).then(function(response) {
+      if(response.data.sucesso){
+        console.log('sucesso');
+      } else {
+        $http.post("http://localhost:1337/postreacao/set", postReacao).then(function(res) {
+          if(res.data.sucesso)
+            console.log('sucesso no set');
+        });
+      }
+    });
+
+    var post = {};
+    post.usuario = sessionStorage.getItem('usuario');
+    post.titulo = $scope.posts[index].titulo;
+    post.conteudo = $scope.posts[index].conteudo + " (shared from @" + $scope.posts[index].usuario + ")";
+    
+    $http.post("http://localhost:1337/post/create", post).then(function(response) {
+      if(response.data.sucesso)
+        console.log('compartilhado');
+    });
   }
 
   $scope.loadPosts = function(){
@@ -132,35 +195,9 @@ myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
 
    $http.post("http://localhost:1337/post/getByUsuarioFollow", usuario).then(function(response) {
 
-    for (var i = 0; i < response.data.rowCount; i++) {
-
-      $http.post("http://localhost:1337/postreacao/get", {idPost : response.data.rows[i].idpost, 
-        usuario: sessionStorage.getItem('usuario')}).then(function(res) {
-
-          if(res.data.sucesso){
-            console.log(res.data.rows[0].reacao);
-            response.data.rows[0].reacao = res.data.rows[0].reacao;
-            response.data.rows[0].compartilhou = res.data.rows[0].compartilhou;
-          }
-        });
-      }
-
-      //response.data.rows[0].reacao = 1;
-
-      $scope.posts = response.data.rows;
-
-      console.log(response.data.rows);
-
-    });
- }
-
- $scope.loadUserPosts = function(){
-
-  var usuario = {usuario: getParameterByName('username')};
-  $http.post("http://localhost:1337/post/getByUsuario", usuario).then(function(response) {
     $scope.posts = response.data.rows;
   });
-}
+ }
 
 
 }]);
@@ -416,19 +453,12 @@ myApp.controller('indexController', ['$scope', '$http', function($scope, $http) 
   $scope.usuario = {};
 
   $scope.loadUser = function(){
-    var usuario = {usuario: getParameterByName('username')};
+    var usuario = {usuario: sessionStorage.getItem('usuario')};
 
-    console.log(usuario);
+    $http.post("http://localhost:1337/usuario/get", usuario).then(function(response) {
+      $scope.usuario = response.data.rows[0];
 
-    if(usuario == null){
-      console.log(" erro");
-    }else{
-
-      $http.post("http://localhost:1337/usuario/get", usuario).then(function(response) {
-        $scope.usuario = response.data.rows[0];
-
-      });
-    }
+    });
   }
 
 }]);
