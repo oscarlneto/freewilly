@@ -4,7 +4,7 @@ module.exports = {
 
 		var query = "INSERT INTO Grupo (usuario, nome, foto, descricao) VALUES ("
 			+Grupo.setMarks(request.usuario)+", "+Grupo.setMarks(request.nome)+", "
-			+Grupo.setMarks(request.foto)+", "+Grupo.setMarks(request.descricao)+");";
+			+Grupo.setMarks(request.foto)+", "+Grupo.setMarks(request.descricao)+") RETURNING idGrupo;";
 
 		Grupo.query(query, function (error, result) {
 

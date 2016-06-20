@@ -118,16 +118,17 @@
   <div ng-controller="myPostsController" ng-init="loadPosts();" class="col-md-8" style="margin-top: 20px;">
     <div ng-repeat="post in posts" class="well bgimg">
       <div  class="media">
-        <a class="pull-left" href="#">
+        <a class="pull-left" href="/freewilly/profile">
           <img ng-src="/avatar/{{post.foto}}" class="img-circle" height="125" width="125">
         </a>
         <div class="media-body">
           <h4 class="media-heading">{{post.titulo}}</h4>
-          <p class="text-left"><a ng-href="/frewilly/user?username={{post.usuario}}">{{post.usuario}}</a></p>
+          <p class="text-left">{{post.usuario}}</p>
           <p>{{post.conteudo}}</p>
           <ul class="list-inline list-unstyled">
             <li><span><i class="glyphicon glyphicon-calendar"></i> {{post.data}} </span></li>
             <li>|</li>
+             <li><span><a class="btn btn-info btn-sm" href="/freewilly/updatepost?idpost={{post.idpost}}">Update</a></span></li>
           </div>
 
         </div>
