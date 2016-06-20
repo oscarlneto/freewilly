@@ -102,8 +102,6 @@ module.exports = {
 						+"WHERE (PostReacao.usuario = "+Post.setMarks(request.usuario)+" OR PostReacao.usuario IS NULL) "
 						+"AND Post.idGrupo = "+request.idGrupo+" ORDER BY data DESC;";
 
-		console.log(query);
-
 		Post.query(query, function (error, result) {
 
 			if(error || result.rowCount == 0) {
