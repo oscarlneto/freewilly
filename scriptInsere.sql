@@ -17,6 +17,7 @@ insert into grupo (usuario, nome, foto, descricao) values ('anduin', 'Heal Bot, 
 insert into grupo (usuario, nome, foto, descricao) values ('garrosh', 'Azralon', 'thrall.png', 'Official Azralon realm group');
 insert into grupo (usuario, nome, foto, descricao) values ('uther', 'Nemesis', 'thrall.png', 'Official Nemesis realm group');
 
+/*insercao dos usuarios nos grupos*/
 insert into grupousuarios (idgrupo, usuario) values (1, 'thrall');
 insert into grupousuarios (idgrupo, usuario) values (2, 'jaina');
 insert into grupousuarios (idgrupo, usuario) values (2, 'anduin');
@@ -46,7 +47,6 @@ insert into grupousuarios (idgrupo, usuario) values (5, 'guldan');
 insert into grupousuarios (idgrupo, usuario) values (5, 'anduin');
 insert into grupousuarios (idgrupo, usuario) values (5, 'jaina');
 
-
 insert into grupousuarios (idgrupo, usuario) values (6, 'anduin');
 insert into grupousuarios (idgrupo, usuario) values (6, 'thrall');
 insert into grupousuarios (idgrupo, usuario) values (6, 'uther');
@@ -62,3 +62,137 @@ insert into grupousuarios (idgrupo, usuario) values (8, 'anduin');
 insert into grupousuarios (idgrupo, usuario) values (8, 'guldan');
 insert into grupousuarios (idgrupo, usuario) values (8, 'jaina');
 
+/*criacao de posts nos grupos*/
+insert into post (usuario, titulo, conteudo, idgrupo) values ('thrall', 'For the Horde!', 'For the Frostwolves!', 1); --1
+insert into post (usuario, titulo, conteudo, idgrupo) values ('garrosh', 'For the Horde!', 'For the Hellscream!', 1); --2
+insert into post (usuario, titulo, conteudo, idgrupo) values ('rexxar', 'Place is the place', 'SMOrc!', 1); --3
+insert into post (usuario, titulo, conteudo, idgrupo) values ('guldan', 'Your soul shall be mine!', 'Never tap last', 1); --4
+
+insert into post (usuario, titulo, conteudo, idgrupo) values ('uther', 'Well Met!', 'Dont forget to put your faith in the light', 2); --5
+insert into post (usuario, titulo, conteudo, idgrupo) values ('anduin', 'The light shall bring victory', 'or not?', 2);--6
+insert into post (usuario, titulo, conteudo, idgrupo) values ('malfurion', 'We must protect the wild', 'from the burning legion', 2);--7
+insert into post (usuario, titulo, conteudo, idgrupo) values ('jaina', 'My magic shall burn', 'PYROBLAST', 2);--8
+
+insert into post (usuario, titulo, conteudo, idgrupo) values ('thrall', 'OMG!! 500 ranked victories', 'FOR DOOMHAMMER!', 3);--9
+insert into post (usuario, titulo, conteudo, idgrupo) values ('anduin', 'Oh Really?', '12 wins arena, you noob', 3);--10
+insert into post (usuario, titulo, conteudo, idgrupo) values ('malfurion', 'They nerfed my combo', 'we cant protect the wild anymore', 3);--11
+insert into post (usuario, titulo, conteudo, idgrupo) values ('jaina', 'ResidentSleeper', 'freeze mage is so boring', 3);--12
+
+insert into post (usuario, titulo, conteudo, idgrupo) values ('uther', 'Best tank ever', '600k HP with divine shield', 4);--13
+insert into post (usuario, titulo, conteudo, idgrupo) values ('garrosh', 'Bitch, please', 'TANK UP', 4);--14
+insert into post (usuario, titulo, conteudo, idgrupo) values ('malfurion', 'Omg man', 'i am a ******* BEAST', 4);--15
+
+insert into post (usuario, titulo, conteudo, idgrupo) values ('valeera', 'LW LFW', 'cheapest leatherworking in Azeroth', 5);--16
+insert into post (usuario, titulo, conteudo, idgrupo) values ('guldan', 'I need some things, @valeera', 'how much?', 5);--17
+insert into post (usuario, titulo, conteudo, idgrupo) values ('anduin', 'BUY ALL YOUR DRAENOR ORES', 'because im tired of farming', 5);--18
+
+insert into post (usuario, titulo, conteudo, idgrupo) values ('anduin', 'LF DPS and TANK', '710+ ilvl', 6);--19
+insert into post (usuario, titulo, conteudo, idgrupo) values ('thrall', 'I can do that, @anduin', '70k mdps or 100k rdps', 6);--20
+insert into post (usuario, titulo, conteudo, idgrupo) values ('uther', 'Well Met!', 'my OS is tanker, i can you help too @anduin', 6);--21
+
+insert into post (usuario, titulo, conteudo, idgrupo) values ('thrall', 'BEST SERVER EVER', 'omg... i love the horde', 7);--22
+
+insert into post (usuario, titulo, conteudo, idgrupo) values ('uther', 'Well....', 'ok. i will stop doing that', 8);--23
+
+/*criacao da relacao de follow*/
+/*Todos da Horda se seguem mutuamente*/
+insert into follow (usuario, follow) values ('guldan', 'thrall');
+insert into follow (usuario, follow) values ('guldan', 'garrosh');
+insert into follow (usuario, follow) values ('guldan', 'rexxar');
+
+insert into follow (usuario, follow) values ('thrall', 'guldan');
+insert into follow (usuario, follow) values ('thrall', 'garrosh');
+insert into follow (usuario, follow) values ('thrall', 'rexxar');
+
+insert into follow (usuario, follow) values ('garrosh', 'thrall');
+insert into follow (usuario, follow) values ('garrosh', 'guldan');
+insert into follow (usuario, follow) values ('garrosh', 'rexxar');
+
+insert into follow (usuario, follow) values ('rexxar', 'guldan');
+insert into follow (usuario, follow) values ('rexxar', 'garrosh');
+insert into follow (usuario, follow) values ('rexxar', 'thrall');
+
+/*Todos da Allianca se seguem mutuamente*/
+insert into follow (usuario, follow) values ('jaina', 'anduin');
+insert into follow (usuario, follow) values ('jaina', 'valeera');
+insert into follow (usuario, follow) values ('jaina', 'uther');
+insert into follow (usuario, follow) values ('jaina', 'malfurion');
+
+insert into follow (usuario, follow) values ('anduin', 'jaina');
+insert into follow (usuario, follow) values ('anduin', 'valeera');
+insert into follow (usuario, follow) values ('anduin', 'uther');
+insert into follow (usuario, follow) values ('anduin', 'malfurion');
+
+insert into follow (usuario, follow) values ('valeera', 'jaina');
+insert into follow (usuario, follow) values ('valeera', 'anduin');
+insert into follow (usuario, follow) values ('valeera', 'uther');
+insert into follow (usuario, follow) values ('valeera', 'malfurion');
+
+insert into follow (usuario, follow) values ('uther', 'jaina');
+insert into follow (usuario, follow) values ('uther', 'anduin');
+insert into follow (usuario, follow) values ('uther', 'valeera');
+insert into follow (usuario, follow) values ('uther', 'malfurion');
+
+insert into follow (usuario, follow) values ('malfurion', 'jaina');
+insert into follow (usuario, follow) values ('malfurion', 'anduin');
+insert into follow (usuario, follow) values ('malfurion', 'valeera');
+insert into follow (usuario, follow) values ('malfurion', 'uther');
+
+/*criacao das reacoes nos posts*/
+/*reacoes no grupo da Horda*/
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (1, 'garrosh', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (1, 'guldan', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (1, 'rexxar', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (2, 'thrall', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (2, 'guldan', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (2, 'rexxar', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (3, 'guldan', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (4, 'rexxar', 1, false, null);
+
+/*reacoes no grupo da Horda*/
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (5, 'malfurion', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (5, 'anduin', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (5, 'jaina', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (5, 'valeera', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (6, 'uther', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (7, 'anduin', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (8, 'anduin', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (8, 'uther', 1, false, null);
+
+/*reacoes no grupo do Hearthtone*/
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (9, 'uther', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (9, 'anduin', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (9, 'guldan', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (9, 'rexxar', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (9, 'garrosh', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (10, 'malfurion', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (10, 'jaina', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (11, 'anduin', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (11, 'jaina', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (12, 'guldan', 1, false, null);
+
+/*reacoes no grupo dos tankers*/
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (13, 'garrosh', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (13, 'malfurion', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (14, 'uther', 1, false, null);
+
+/*reacoes no grupo de trade*/
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (16, 'guldan', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (16, 'anduin', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (17, 'valeera', 1, false, null);
+
+/*reacoes no grupo dos healers*/
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (19, 'thrall', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (19, 'uther', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (20, 'anduin', 1, false, null);
+
+/*reacoes no grupo do azralon*/
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (22, 'guldan', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (22, 'rexxar', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (22, 'garrosh', 1, false, null);
+
+/*reacoes no grupo do nemesis*/
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (23, 'anduin', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (23, 'valeera', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (23, 'malfurion', 1, false, null);
+insert into postreacao (idpost, usuario, reacao, compartilhou, donopost) values (23, 'jaina', 1, false, null);
