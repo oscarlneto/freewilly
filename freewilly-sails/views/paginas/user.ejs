@@ -124,11 +124,11 @@
           <ul class="list-inline list-unstyled">
             <li><span><i class="glyphicon glyphicon-calendar"></i> {{post.data}} </span></li>
             <li>|</li>
-            <li ng-show="post.liked"><span><button class="btn btn-info btn-sm">Liked</button></span></li>
-            <li ng-hide="post.liked"><span><button class="btn btn-info btn-sm">Like</button></span></li>
+            <li ng-show="post.reacao == 1 || false"><span><button ng-click="unlike($index)" class="btn btn-success btn-sm">Liked</button></span></li>
+            <li ng-show="post.reacao == 0 || !post.reacao"><span><button ng-click="like($index)" class="btn btn-info btn-sm">Like</button></span></li>
             <li>|</li>
-            <li ng-show="post.shared"><span><button class="btn btn-info btn-sm">Shared</button></span></li>
-            <li ng-hide="post.shared"><span><button class="btn btn-info btn-sm">Share</button></span></li>
+            <li ng-show="post.compartilhou || false"><span><button class="btn btn-success btn-sm">Shared</button></span></li>
+            <li ng-hide="post.compartilhou || false"><span><button ng-click="share($index)" class="btn btn-info btn-sm">Share</button></span></li>
             <li>|</li>
 
           </div>
