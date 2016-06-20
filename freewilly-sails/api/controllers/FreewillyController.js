@@ -31,5 +31,8 @@ module.exports={
 	},
 	groupindex: function (req, res) {
 		res.view('paginas/groupindex', {cwd: 'spicty'});
+	},
+	user: function (req, res) {
+		res.view('paginas/user', {cwd: 'spicty'});
 	}
 };

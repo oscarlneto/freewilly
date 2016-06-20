@@ -79,6 +79,14 @@ myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
     });
  }
 
+ $scope.loadUserPosts = function(){
+  
+    var usuario = {usuario: getParameterByName('username')};
+    $http.post("http://localhost:1337/post/getByUsuario", usuario).then(function(response) {
+      $scope.posts = response.data.rows;
+    });
+  }
+
 
 }]);
 
@@ -317,6 +325,20 @@ myApp.controller('indexController', ['$scope', '$http', function($scope, $http) 
 
       });
     }
+  }
+
+}]);
+
+myApp.controller('userController', ['$scope', '$http', function($scope, $http) {
+  $scope.usuario = {};
+
+  $scope.loadUser = function(){
+    var usuario = {usuario: getParameterByName('username')};
+
+    $http.post("http://localhost:1337/usuario/get", usuario).then(function(response) {
+      $scope.usuario = response.data.rows[0];
+      console.log($scope.usuario);
+    });
   }
 
 }]);

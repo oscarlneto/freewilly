@@ -25,11 +25,7 @@
 
     <%- include navbar.ejs %>
 
-<<<<<<< HEAD
-    <div ng-controller="allUsersController" ng-init="loadUsers();"class="container bootstrap snippet" style="margin-top:100px;">
-=======
     <div ng-controller="allUsersController" ng-init="loadUsers()" class="container bootstrap snippet" style="margin-top:100px;">
->>>>>>> master
         <div class="row">
             <div class="col-lg-12">
                 <div class="main-box no-header clearfix">
@@ -49,7 +45,8 @@
 
                                         <td>
                                             <img ng-src="/avatar/{{user.foto}}" class="img-circle" alt="">
-                                            <a href="#" class="user-link">{{user.usuario}}</a>
+                                            <a href="http://localhost:1337/freewilly/user?username={{user.usuario}}" 
+                                            class="user-link">{{user.usuario}}</a>
                                             <span class="user-subhead">{{user.nome}}</span>
                                         </td>
                                         <td>{{user.aniversario}}</td>
