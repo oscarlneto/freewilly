@@ -38,7 +38,8 @@ CREATE TABLE Grupo (
 	foto VARCHAR(50),
 	descricao VARCHAR(200),
 	CONSTRAINT PKgrupo PRIMARY KEY (idGrupo),
-	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE
+	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE,
+	UNIQUE (usuario, nome)
 );
 
 CREATE TABLE GrupoUsuarios (
@@ -65,9 +66,11 @@ CREATE TABLE PostReacao (
 	idPost INTEGER NOT NULL,
 	usuario VARCHAR(10) NOT NULL,
 	reacao INTEGER DEFAULT 0,
+	donoPost VARCHAR(10),
 	compartilhou BOOLEAN DEFAULT FALSE,
 	CONSTRAINT FKpost FOREIGN KEY (idPost) REFERENCES Post (idPost) ON DELETE CASCADE,
 	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE,
+	CONSTRAINT FKdonoPost FOREIGN KEY (donoPost) REFERENCES Usuario (usuario) ON DELETE CASCADE,
 	CONSTRAINT PKpostReacao PRIMARY KEY (idPost, usuario),
 	CONSTRAINT CHreacao CHECK (reacao IN (0, 1, 2))
 );

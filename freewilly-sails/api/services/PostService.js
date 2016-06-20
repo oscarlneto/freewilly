@@ -125,7 +125,7 @@ module.exports = {
 						+"LEFT JOIN PostReacao ON Post.idPost = PostReacao.idPost "
 						+"JOIN Follow ON Post.usuario = Follow.follow "
 						+"WHERE (PostReacao.usuario = "+Post.setMarks(request.usuario)+" OR PostReacao.usuario IS NULL) "
-						+"AND Follow.usuario = "+Post.setMarks(request.usuario)+" ORDER BY Post.data DESC;";
+						+"AND Follow.usuario = "+Post.setMarks(request.usuario)+" AND Post.idGrupo IS NULL ORDER BY Post.data DESC;";
 
 		Post.query(query, function (error, result) {
 
