@@ -62,5 +62,16 @@ module.exports = {
 		GrupoUsuariosService.selectByIdGrupo(grupoUsuarios, function (result) {
 			response.json(result);
 		});
+	},
+
+	getByIdGrupoUsuario: function (request, response) {
+
+		var grupoUsuarios = {};
+		grupoUsuarios.idGrupo = GrupoUsuarios.setUndefined(request.param('idGrupo'));
+		grupoUsuarios.usuario = GrupoUsuarios.setUndefined(request.param('usuario'));
+
+		GrupoUsuariosService.selectByIdGrupoUsuario(grupoUsuarios, function (result) {
+			response.json(result);
+		});
 	}
 };

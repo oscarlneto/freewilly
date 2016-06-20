@@ -100,7 +100,7 @@ module.exports = {
 		var query = "SELECT Post.idPost, Post.usuario, Post.titulo, Post.conteudo, Post.data, Usuario.foto "
 						+"FROM Post JOIN GrupoUsuarios ON Post.idGrupo = GrupoUsuarios.idGrupo "
 						+"JOIN Usuario ON Post.usuario = Usuario.usuario "
-						+"WHERE idGrupo = "+request.idGrupo+" ORDER BY data DESC;";
+						+"WHERE Post.idGrupo = "+request.idGrupo+" ORDER BY data DESC;";
 
 		Post.query(query, function (error, result) {
 

@@ -78,7 +78,7 @@ module.exports = {
 
 	selectAll: function(request, response) {
 
-		var query = "SELECT * FROM Usuario;";
+		var query = "SELECT * FROM Usuario WHERE usuario != "+Usuario.setMarks(request.usuario)+";";
 
 		Usuario.query(query, function (error, result) {
 

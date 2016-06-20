@@ -338,9 +338,11 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
     usuario.usuario = $scope.usuario.usuario;
     usuario.senha = $scope.usuario.senha;
     usuario.nome = $('#name').val();
-    usuario.aniversario = $scope.usuario.aniversario;
+    usuario.aniversario =  $('#date').val();
     usuario.foto = $('#avatar').val();
     usuario.descricao = $('#description').val();
+
+    console.log(usuario.aniversario);
 
     $http.post('http://localhost:1337/usuario/set', usuario).then(function(response) {
       if(response.data.sucesso)
@@ -367,24 +369,6 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
 
 myApp.controller('allUsersController', ['$scope', '$http', function($scope, $http) {
   $scope.allusers = {};
-  /*[
-  {
-    usuario: 'patodomau', 
-    nome: 'Tales Prates Correia',
-    descricao: 'alguma coisa ai',
-    data: '1992-04-14',
-    avatar: 'thrall.png',
-    followed: false
-  },
-  {
-    usuario: 'patodomaui', 
-    nome: 'Tales Prates Correia2',
-    descricao: 'tchau mundo',
-    avatar: 'malfurion.png',
-    data: '1992-04-15',
-    followed: true
-  }
-  ];*/
 
   $scope.loadUsers = function(){
     var usuario = {};
@@ -394,6 +378,11 @@ myApp.controller('allUsersController', ['$scope', '$http', function($scope, $htt
        $scope.allusers = response.data.rows;
    });
 
+    var usuario = {usuario: sessionStorage.getItem("usuario")};
+
+    $http.post('http://localhost:1337/usuario/getAll', usuario).then(function(response) {
+      $scope.allusers = response.data.rows;
+   });
   }
 
   $scope.follow = function(index){
