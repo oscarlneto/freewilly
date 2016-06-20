@@ -36,14 +36,14 @@
             <fieldset class="form-group">
               <label class="col-md-2 control-label" for="postTitle">Title</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="postTitle" placeholder="post title">
+                <input type="text" class="form-control" id="postTitle" minlength="1" maxlength="30"  title="1 to 30 characters" placeholder="post title">
               </div>
             </fieldset>
 
             <fieldset class="form-group">
               <label class="col-md-2 control-label" for="postContent">Message</label>
               <div class="col-md-8">
-                <textarea class="form-control" id="postContent" name="postContent" rows="5"></textarea>
+                <textarea class="form-control" id="postContent" maxlength="300"  title="0 to 300 characters" name="postContent" rows="5"></textarea>
               </div>
             </fieldset>
 
