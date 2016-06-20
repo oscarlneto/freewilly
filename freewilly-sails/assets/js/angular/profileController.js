@@ -3,12 +3,35 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
   $scope.following = {};
 
   $scope.loadUser = function(){
-
     var usuario = {usuario: sessionStorage.getItem("usuario")};
+    $http.post("http://localhost:1337/usuario/get", usuario).then(function(response) {
+      $scope.usuario = response.data.rows[0];
+      console.log($scope.usuario);
+    });
+  }
 
+  $scope.loadUserUser = function(){
+    var usuario = {};
+
+    usuario.usuario = getParameterByName('username');
     $http.post("http://localhost:1337/usuario/get", usuario).then(function(response) {
       $scope.usuario = response.data.rows[0];
     });
+
+    var usuario2 = {};
+
+    usuario2.usuario = sessionStorage.getItem("usuario");
+    usuario2.follow = getParameterByName('username');
+
+    $http.post("http://localhost:1337/follow/getByUsuarioFollow", usuario2).then(function(response) {
+      if(response.data.rowCount == 1){
+        $scope.following = true;
+      } else {
+        $scope.following = false;
+      }
+
+    });
+
   }
 
   $scope.updateUser = function(){
@@ -21,9 +44,11 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
     usuario.foto = $('#avatar').val();
     usuario.descricao = $('#description').val();
 
+    console.log(usuario.aniversario);
+
     $http.post('http://localhost:1337/usuario/set', usuario).then(function(response) {
       if(response.data.sucesso)
-       $window.location.href = 'http://localhost:1337/freewilly/profile';
+       $window.location.href = 'http://localhost:1337/freewilly/index';
    });
   }
 
@@ -37,4 +62,37 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
        $window.location.href = 'http://localhost:1337/freewilly/login';
    });
   }
+
+  $scope.follow = function(){
+    var usuario = {};
+
+    usuario.usuario = sessionStorage.getItem("usuario");
+    usuario.follow = getParameterByName('username');
+
+    $http.post("http://localhost:1337/follow/create", usuario).then(function(response) {
+      if(response.data.sucesso == true){
+        console.log(response.data.sucesso);
+        $scope.following = true;
+      }
+    });
+
+  }
+
+  $scope.unfollow = function(){
+    var usuario = {};
+
+    usuario.usuario = sessionStorage.getItem("usuario");
+    usuario.follow = getParameterByName('username');
+
+    $http.post("http://localhost:1337/follow/remove", usuario).then(function(response) {
+      if(response.data.sucesso == true){
+        console.log(response.data.sucesso);
+        $scope.following = false;
+      }
+    });
+
+  }
+
+
+
 }]);
