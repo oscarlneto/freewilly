@@ -268,6 +268,7 @@ myApp.controller('groupPostController', ['$scope', '$http', function($scope, $ht
 
     var grupo = {};
 
+    grupo.usuario = sessionStorage.getItem("usuario");
     grupo.idGrupo = getParameterByName('group');
 
     $http.post('http://localhost:1337/post/getByGrupo', grupo).then(function(response) {
@@ -334,27 +335,6 @@ myApp.controller('groupMemberList', ['$scope', '$http', function($scope, $http) 
 
   $scope.hideForm = function(){
     $scope.addButton = true;
-  }
-
-
-}]);
-
-myApp.controller('newGroupController', ['$scope', '$http', function($scope, $http) {
-  $scope.banner = 'panel-body bgimg';
-
-  $scope.createGroup = function(){
-    var group = {};
-
-    group.usuario = sessionStorage.getItem('usuario');
-    group.nome = $('#groupName').val();
-    group.foto = 'thrall.png';
-    group.descricao = $('#groupDescription').val();
-
-    $http.post('http://localhost:1337/Grupo/create', group).then(function(response) {
-      if(response.data.sucesso)
-        console.log(response.data.sucesso);
-    });
-
   }
 
 
@@ -463,106 +443,6 @@ myApp.controller('indexController', ['$scope', '$http', function($scope, $http) 
 
 }]);
 
-myApp.controller('profileController', ['$scope', '$http', '$window', 'authenticationService', function($scope, $http, $window, authenticationService) {
-  $scope.usuario = {};
-  $scope.following = {};
-
-  $scope.loadUser = function(){
-    var usuario = {usuario: sessionStorage.getItem("usuario")};
-    $http.post("http://localhost:1337/usuario/get", usuario).then(function(response) {
-      $scope.usuario = response.data.rows[0];
-      console.log($scope.usuario);
-    });
-  }
-
-  $scope.loadUserUser = function(){
-    var usuario = {};
-
-    usuario.usuario = getParameterByName('username');
-    $http.post("http://localhost:1337/usuario/get", usuario).then(function(response) {
-      $scope.usuario = response.data.rows[0];
-      console.log($scope.usuario);
-    });
-
-
-    usuario.usuario = sessionStorage.getItem("usuario");
-    usuario.follow = getParameterByName('username');
-
-    $http.post("http://localhost:1337/follow/getByUsuarioFollow", usuario).then(function(response) {
-      if(response.data.rowCount == 1){
-        $scope.following = true;
-      } else {
-        $scope.following = false;
-      }
-
-    });
-
-  }
-
-  $scope.updateUser = function(){
-    var usuario = {};
-
-    usuario.usuario = $scope.usuario.usuario;
-    usuario.senha = $scope.usuario.senha;
-    usuario.nome = $('#name').val();
-    usuario.aniversario =  $('#date').val();
-    usuario.foto = $('#avatar').val();
-    usuario.descricao = $('#description').val();
-
-    console.log(usuario.aniversario);
-
-    $http.post('http://localhost:1337/usuario/set', usuario).then(function(response) {
-      if(response.data.sucesso)
-       $window.location.href = 'http://localhost:1337/freewilly/index';
-   });
-  }
-
-  $scope.removeUser = function(){
-    var usuario = {};
-
-    usuario.usuario = $scope.usuario.usuario;
-
-    $http.post('http://localhost:1337/usuario/remove', usuario).then(function(response) {
-      if(response.data.sucesso)
-       $window.location.href = 'http://localhost:1337/freewilly/login';
-   });
-  }
-
-  $scope.follow = function(){
-    var usuario = {};
-
-    usuario.usuario = sessionStorage.getItem("usuario");
-    usuario.follow = getParameterByName('username');
-
-    $http.post("http://localhost:1337/follow/create", usuario).then(function(response) {
-      if(response.data.sucesso == true){
-        console.log(response.data.sucesso);
-        $scope.following = true;
-      }
-    });
-
-  }
-
-  $scope.unfollow = function(){
-    var usuario = {};
-
-    usuario.usuario = sessionStorage.getItem("usuario");
-    usuario.follow = getParameterByName('username');
-
-    $http.post("http://localhost:1337/follow/remove", usuario).then(function(response) {
-      if(response.data.sucesso == true){
-        console.log(response.data.sucesso);
-        $scope.following = false;
-      }
-    });
-
-  }
-
-
-
-}]);
-
-
 
 myApp.controller('allUsersController', ['$scope', '$http', function($scope, $http) {
   $scope.allusers = {};
@@ -582,50 +462,6 @@ myApp.controller('allUsersController', ['$scope', '$http', function($scope, $htt
 
   $scope.unfollow = function(index){
     $scope.allusers[index].followed = false;
-  }
-
-}]);
-
-myApp.controller('registerController', ['$scope', '$http', '$window', function($scope, $http, $window) {
-  $scope.avatar = 'thrall.png';
-
-  $scope.createUser = function(){
-    var usuario = {};
-
-    usuario.usuario = $('#login').val();
-    usuario.senha = $('#password').val();
-    usuario.nome = $('#name').val();
-    usuario.aniversario = $('#date').val();
-    usuario.foto = $('#avatar').val();
-    usuario.descricao = $('#description').val();
-
-    $http.post('http://localhost:1337/usuario/create', usuario).then(function(response) {
-      if(response.data.sucesso)
-       $window.location.href = 'http://localhost:1337/freewilly/index';
-   });
-  }
-
-}]);
-
-myApp.controller('loginController', ['$scope', '$http', '$window', function($scope, $http, $window) {
-
-  $scope.signIn = function(){
-
-    var usuario = {};
-
-    usuario.usuario = $('#login').val();
-    usuario.senha = $('#password').val();
-    
-    $http.post('http://localhost:1337/usuario/login', usuario).then(function(response) {
-
-      if(response.data.sucesso == true)
-      {
-        sessionStorage.setItem("usuario", $('#login').val());
-        sessionStorage.setItem("autenticou", "true");
-
-        $window.location.href = 'http://localhost:1337/freewilly/index';
-      }
-    });
   }
 
 }]);
