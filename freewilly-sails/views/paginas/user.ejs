@@ -37,11 +37,11 @@
                     <p class="text-left">{{usuario.nome}}</p>
                     <p>{{usuario.descricao}}</p>
                     <ul class="list-inline list-unstyled">
-                        <li ng-show="post.followed">
+                        <li ng-show="usuario.following">
                             <button ng-click="unfollow($index)" class="btn btn-success btn-block"> Following </button>
                         </li>
 
-                        <li ng-hide="post.followed">
+                        <li ng-hide="usuario.following">
                             <button ng-click="follow($index)" class="btn btn-info btn-block"> Follow </button>
                         </li>
                     </ul>
