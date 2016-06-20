@@ -269,9 +269,11 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
     usuario.usuario = $scope.usuario.usuario;
     usuario.senha = $scope.usuario.senha;
     usuario.nome = $('#name').val();
-    usuario.aniversario = $scope.usuario.aniversario;
+    usuario.aniversario =  $('#date').val();
     usuario.foto = $('#avatar').val();
     usuario.descricao = $('#description').val();
+
+    console.log(usuario.aniversario);
 
     $http.post('http://localhost:1337/usuario/set', usuario).then(function(response) {
       if(response.data.sucesso)
