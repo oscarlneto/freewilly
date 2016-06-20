@@ -75,6 +75,7 @@ module.exports = {
 
 		var post = {};
 		post.idGrupo = Post.setUndefined(request.param('idGrupo'));
+		post.usuario = Post.setUndefined(request.param('usuario'));
 
 		PostService.selectByGrupo(post, function (result) {
 			response.json(result);
