@@ -136,5 +136,30 @@ module.exports = {
 				return response(result);
 			}
 		});
+	},
+
+	selectByUsuarioFollowReacao: function(request, response) {
+
+		var query = "SELECT Post.idPost, Post.usuario, Post.titulo, Post.conteudo, Post.data, Usuario.foto, "
+						+"PostReacao.reacao, PostReacao.compartilhou "
+						+"FROM Post JOIN Usuario ON Post.usuario = Usuario.usuario "
+						+"LEFT JOIN PostReacao ON Post.idPost = PostReacao.idPost "
+						+"WHERE Post.usuario = "+Post.setMarks(request.follow)+" AND "
+						+"(PostReacao.usuario = "+Post.setMarks(request.usuario)+" OR PostReacao.usuario IS NULL) "
+						+"ORDER BY Post.data DESC;";
+
+		Post.query(query, function (error, result) {
+
+			if(error || result.rowCount == 0) {
+				return response({sucesso: false});
+			}
+
+			else {
+				Post.formatDateTime(result);
+
+				result.sucesso = true;
+				return response(result);
+			}
+		});
 	}
 }

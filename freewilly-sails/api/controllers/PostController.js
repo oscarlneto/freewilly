@@ -91,5 +91,16 @@ module.exports = {
 		PostService.selectByUsuarioFollow(post, function (result) {
 			response.json(result);
 		});
+	},
+
+	getByUsuarioFollowReacao: function (request, response) {
+
+		var post = {};
+		post.usuario = Post.setUndefined(request.param('usuario'));
+		post.follow = Post.setUndefined(request.param('follow'));
+
+		PostService.selectByUsuarioFollowReacao(post, function (result) {
+			response.json(result);
+		});
 	}
 }
