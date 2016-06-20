@@ -11,7 +11,6 @@ myApp.controller('updatePostController', ['$scope', '$http', '$window', function
 
       if(response.data.sucesso == true) {
         $scope.post = response.data.rows[0];
-        console.log($scope.post);
       }
     });
   }
