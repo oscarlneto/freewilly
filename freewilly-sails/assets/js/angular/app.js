@@ -357,7 +357,7 @@ myApp.controller('newPostController', ['$scope', '$http', '$window', function($s
 
   }
 
-  $scope.createPost = function(){
+  $scope.createPost = function(index){
     var post = {};
 
     post.usuario = sessionStorage.getItem("usuario");
@@ -365,7 +365,9 @@ myApp.controller('newPostController', ['$scope', '$http', '$window', function($s
     post.conteudo = $('#postContent').val();
     post.idGrupo = $('#postGroup').val();
 
-    console.log(post);
+    /*if(post.idGrupo != ""){
+      post.conteudo = post.conteudo + " (posted on @" + $scope.myGroups[index].nome + ")";
+    }*/
 
     $http.post('http://localhost:1337/post/create', post).then(function(response) {
       if(response.data.sucesso)
