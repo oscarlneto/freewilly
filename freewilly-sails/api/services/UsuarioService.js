@@ -113,5 +113,24 @@ module.exports = {
 				return response(result);
 			}
 		});
-	}
+	}/*,
+
+	selectByUsuarioFollow: function(request, response) {
+
+		var query = "SELECT * FROM Usuario JOIN Follow ON Usuario.usuario =  WHERE usuario = "+Usuario.setMarks(request.usuario)+";";
+
+		Usuario.query(query, function (error, result) {
+
+			if(error || result.rowCount == 0) {
+				return response({sucesso: false});
+			}
+
+			else {
+				Usuario.formatDate(result);
+
+				result.sucesso = true;
+				return response(result);
+			}
+		});
+	}*/
 }

@@ -412,13 +412,7 @@ myApp.controller('allUsersController', ['$scope', '$http', function($scope, $htt
   $scope.allusers = {};
 
   $scope.loadUsers = function(){
-    var usuario = {};
-
-    $http.post('http://localhost:1337/usuario/getAll', usuario).then(function(response) {
-      if(response.data.sucesso)
-       $scope.allusers = response.data.rows;
-   });
-
+    
     var usuario = {usuario: sessionStorage.getItem("usuario")};
 
     $http.post('http://localhost:1337/usuario/getAll', usuario).then(function(response) {
@@ -435,8 +429,6 @@ myApp.controller('allUsersController', ['$scope', '$http', function($scope, $htt
   }
 
 }]);
-
-
 
 myApp.controller('registerController', ['$scope', '$http', '$window', function($scope, $http, $window) {
   $scope.avatar = 'thrall.png';

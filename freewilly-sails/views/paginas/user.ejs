@@ -26,7 +26,7 @@
     <%- include navbar.ejs %>
     <div class="row">
 
-        <div ng-controller="indexController" ng-init="loadUser()" style="margin-top: 100px;" class="container">
+        <div ng-controller="userController" ng-init="loadUser()" style="margin-top: 100px;" class="container">
           <div class="well col-md-6">
               <div class="media">
                 <a class="pull-left" ng-href="/freewilly/user?username={{usuario.usuario}}">
@@ -79,7 +79,7 @@
         </a>
         <div class="media-body">
           <h4 class="media-heading">{{post.titulo}}</h4>
-          <p class="text-left"><a ng-href="/frewilly/user?username={{post.usuario}}">{{post.usuario}}</a></p>
+          <p class="text-left">{{post.usuario}}</p>
           <p>{{post.conteudo}}</p>
           <ul class="list-inline list-unstyled">
             <li><span><i class="glyphicon glyphicon-calendar"></i> {{post.data}} </span></li>
