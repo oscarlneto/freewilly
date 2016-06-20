@@ -34,5 +34,8 @@ module.exports={
 	},
 	user: function (req, res) {
 		res.view('paginas/user', {cwd: 'spicty'});
+	},
+	updatepost: function (req, res) {
+		res.view('paginas/updatepost', {cwd: 'spicty'});
 	}
 };
