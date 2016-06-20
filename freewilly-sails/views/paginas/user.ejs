@@ -1,77 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <title>Example - example-example8-production</title>
+  
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Blog Home - Start Bootstrap Template</title>
-
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/css/external.css"/>
-    
-
-
-
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/css/external.css"/>
+  
 </head>
 
+
+
 <body ng-app="spicyApp1" background="/background.jpg">
+ <%- include navbar.ejs %>
 
-    <%- include navbar.ejs %>
-    <div class="row">
-
-        <div ng-controller="userController" ng-init="loadUser()" style="margin-top: 100px;" class="container">
-          <div class="well col-md-6">
-              <div class="media">
-                <a class="pull-left" ng-href="/freewilly/user?username={{usuario.usuario}}">
-                    <img ng-src="/avatar/{{usuario.foto}}" class="img-circle" height="100" width="100">
-                </a>
-                <div class="media-body">
-                    <h2 class="media-heading">{{usuario.usuario}}</h2>
-                    <p class="text-left">{{usuario.nome}}</p>
-                    <p>{{usuario.descricao}}</p>
-                    <ul class="list-inline list-unstyled">
-                        <li ng-show="usuario.following">
-                            <button ng-click="unfollow($index)" class="btn btn-success btn-block"> Following </button>
-                        </li>
-
-                        <li ng-hide="usuario.following">
-                            <button ng-click="follow($index)" class="btn btn-info btn-block"> Follow </button>
-                        </li>
-                    </ul>
-
-                </div>
+ <div class="container">   
+   <div class="row"> 
+    <div ng-controller="profileController" ng-init="loadUserUser()" style="margin-top:50px;" class="col-md-8">                    
+      <div class="panel panel-info" style="position: relative; top: 20px; opacity: 0.90;">
+        <div class="panel-heading clearfix">
+          <div class="panel-title">My Profile
+            <div class="pull-right">
+              <button ng-show="following" ng-click="unfollow();" class="btn btn-success btn-sm">Following</button>
+              <button ng-hide="following" ng-click="follow();" class="btn btn-info btn-sm">Follow</button>
             </div>
-        </div>
-    </div>
+          </div>
 
-</div>
 
-<!-- Page Content -->
-<!-- /.container -->
+        </div>     
 
-<div ng-controller="groupListController" ng-init="loadUserGroups();" class="col-md-4" style="margin-top: 70px;">
+        <div style="padding-top:30px" class="panel-body">
+
+          <!-- -->
+          <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+
+
+          <form class="form-horizontal" action="" method="post">
+
+
+
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Name</label>
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" required ng-value="usuario.nome"  disabled minlength="4" maxlength="30" pattern="[A-Za-z\s]{4,30}" title="4 to 30 characters" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="login">Login</label>
+              <div class="col-md-9">
+                <input id="login" name="login" type="text" required ng-value="usuario.usuario" disabled class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="date">Birthday</label>
+              <div class="col-md-9">
+                <input id="date" name="date" type="text" ng-value="usuario.aniversario" disabled pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" title="DD/MM/YYYY" class="form-control">
+              </div>
+            </div>
+
+            <!-- Message body -->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="description">Description</label>
+              <div class="col-md-9">
+                <textarea class="form-control" id="description" name="description" disabled maxlength="300"  title="0 to 300 characters" rows="5">{{usuario.descricao}}</textarea>
+              </div>
+            </div>
+            <div class="form-group">
+
+             <label class="col-md-3 control-label" for="avatar">Select Your Avatar:</label>
+             <div class="col-md-6">
+              <select ng-model="usuario.foto" class="form-control" disabled id="avatar" name="avatar">
+               <option value="thrall.png">Thrall</option>
+               <option value="jaina.png">Jaina Proudmoore</option>
+               <option value="anduin.png">Anduin Wrynn</option>
+               <option value="valeera.png">Valeera Sanguinar</option>
+               <option value="uther.png">Uther Lightbringer</option>
+               <option value="guldan.png">Guldan</option>
+               <option value="garrosh.png">Garrosh Hellscream</option>
+               <option value="malfurion.png">Malfurion Stormrage</option>
+               <option value="rexxar.png">Rexxar</option>
+             </select>
+           </div>
+           <div class="col-md-2">
+             <img ng-src="/avatar/{{usuario.foto}}" class="img-rounded" height="75" width="75">
+           </div>
+         </div>
+         <!-- Form actions -->
+       </form>     
+     </div>                     
+   </div>  
+ </div>
+ <div ng-controller="groupListController" ng-init="loadUserGroups();" class="col-md-4" style="margin-top: 70px;">
 
   <div class="panel panel-info">
     <div class="panel-heading">
       <h3 class="panel-title">
-        My Groups</h3>
+        His Groups</h3>
       </div>
-      <ul class="list-group">
-        <a ng-repeat="group in groups" ng-href="/freewilly/groupindex?group={{group.idgrupo}}" class="list-group-item">{{group.nome}}</a>
-
-      </ul>
+      <div class="panel-body illidan">
+        <ul class="list-group" style="opacity: 0.75">
+          <a ng-repeat="group in groups" ng-href="/freewilly/groupindex?group={{group.idgrupo}}" class="list-group-item">{{group.nome}}</a>
+        </ul>
+      </div>
     </div>
 
   </div>
 
-<div ng-controller="postController" ng-init="loadUserPosts();" class="col-md-8" style="margin-top: 20px;">
+  <div ng-controller="myPostsController" ng-init="loadUserPosts();" class="col-md-8" style="margin-top: 20px;">
     <div ng-repeat="post in posts" class="well bgimg">
       <div  class="media">
         <a class="pull-left" href="#">
@@ -79,7 +119,7 @@
         </a>
         <div class="media-body">
           <h4 class="media-heading">{{post.titulo}}</h4>
-          <p class="text-left">{{post.usuario}}</p>
+          <p class="text-left"><a ng-href="/frewilly/user?username={{post.usuario}}">{{post.usuario}}</a></p>
           <p>{{post.conteudo}}</p>
           <ul class="list-inline list-unstyled">
             <li><span><i class="glyphicon glyphicon-calendar"></i> {{post.data}} </span></li>
@@ -103,18 +143,22 @@
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title">
-            Groups I Own</h3>
+            Groups He Owns</h3>
           </div>
-          <ul class="list-group">
-            <a ng-repeat="group in groups" ng-href="/freewilly/groupindex?group={{group.idgrupo}}" class="list-group-item">{{group.nome}}</a>
-            <a href="/freewilly/newgroup" class=" btn btn-block btn-success">New group</a>
-
-          </ul>
+          <div class="panel-body illidan">
+            <ul class="list-group" style="opacity: 0.75">
+              <a ng-repeat="group in groups" ng-href="/freewilly/groupindex?group={{group.idgrupo}}" class="list-group-item">{{group.nome}}</a>
+            </ul>
+          </div>
         </div>
 
       </div>
-</div>
+
+
+    </div>
+
+  </div>
+
 
 </body>
 
-</html>

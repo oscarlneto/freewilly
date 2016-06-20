@@ -96,12 +96,8 @@
 
             </div>
             <ul class="list-group">
-<<<<<<< Updated upstream
-              <a ng-repeat="member in members" ng-href="/freewilly/user?username={{member.usuario}}" class="list-group-item">{{member.usuario}}</a>
-=======
               <!--<a ng-href="/freewilly/index?username={{admin}}" class="list-group-item">{{admin}}</a>-->
               <a ng-repeat="member in members" ng-href="/freewilly/index?username={{member.usuario}}" class="list-group-item">{{member.usuario}}</a>
->>>>>>> Stashed changes
               <button ng-show="addButton" ng-click="showForm()" class=" btn btn-block btn-success">Add member</button>
 
               <div ng-hide="addButton" class="input-group" >

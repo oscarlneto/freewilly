@@ -59,8 +59,6 @@ module.exports = {
 
 	getAll: function (request, response) {
 		var usuario = {};
-
-		var usuario = {};
 		usuario.usuario =  Usuario.setUndefined(request.param('usuario'));
 
 		UsuarioService.selectAll(usuario, function (result) {

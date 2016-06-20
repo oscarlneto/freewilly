@@ -17,6 +17,12 @@ body{
 	color: white;
 }
 
+.illidan{
+	background-image: url('/banner/background_post_list.jpg');
+	background-size: 100% auto;
+	color: white;
+}
+
 input:invalid{
 	background-color: #F45254
 }

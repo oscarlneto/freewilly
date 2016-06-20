@@ -38,6 +38,13 @@ myApp.controller('myPostsController', ['$scope', '$http', function($scope, $http
     });
   }
 
+  $scope.loadUserPosts = function(){
+    var usuario = {usuario: getParameterByName('username')};
+    $http.post("http://localhost:1337/post/getByUsuario", usuario).then(function(response) {
+      $scope.posts = response.data.rows;
+    });
+  }
+
 }]);
 
 myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
@@ -80,12 +87,12 @@ myApp.controller('postController', ['$scope', '$http', function($scope, $http) {
  }
 
  $scope.loadUserPosts = function(){
-  
-    var usuario = {usuario: getParameterByName('username')};
-    $http.post("http://localhost:1337/post/getByUsuario", usuario).then(function(response) {
-      $scope.posts = response.data.rows;
-    });
-  }
+
+  var usuario = {usuario: getParameterByName('username')};
+  $http.post("http://localhost:1337/post/getByUsuario", usuario).then(function(response) {
+    $scope.posts = response.data.rows;
+  });
+}
 
 
 }]);
@@ -298,10 +305,10 @@ myApp.controller('groupListController', ['$scope', '$http', function($scope, $ht
 
   }
 
-   $scope.loadUserGroups = function() {
+  $scope.loadUserGroups = function() {
 
     var usuario = {usuario: getParameterByName('username')};
-   
+
     $http.post('http://localhost:1337/GrupoUsuarios/getByUsuario', usuario).then(function(response) {
       if(response.data.sucesso)
         $scope.groups = response.data.rows;
@@ -358,33 +365,9 @@ myApp.controller('indexController', ['$scope', '$http', function($scope, $http) 
 
 }]);
 
-myApp.controller('userController', ['$scope', '$http', function($scope, $http) {
-  $scope.usuario = {};
-
-  $scope.loadUser = function(){
-
-    var usuario = {usuario: getParameterByName('username')};
-
-    $http.post("http://localhost:1337/usuario/get", usuario).then(function(response) {
-      
-      $scope.usuario = response.data.rows[0];
-    });
-
-    var follow = {};
-    follow.usuario = sessionStorage.getItem("usuario");
-    follow.follow = getParameterByName('username');
-
-    $http.post("http://localhost:1337/follow/getByUsuarioFollow", follow).then(function(response) {
-
-      $scope.usuario.following = response.data.sucesso;
-    });
-
-  }
-
-}]);
-
 myApp.controller('profileController', ['$scope', '$http', '$window', 'authenticationService', function($scope, $http, $window, authenticationService) {
   $scope.usuario = {};
+  $scope.following = {};
 
   $scope.loadUser = function(){
     var usuario = {usuario: sessionStorage.getItem("usuario")};
@@ -392,6 +375,29 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
       $scope.usuario = response.data.rows[0];
       console.log($scope.usuario);
     });
+  }
+
+  $scope.loadUserUser = function(){
+    var usuario = {};
+
+    usuario.usuario = getParameterByName('username');
+    $http.post("http://localhost:1337/usuario/get", usuario).then(function(response) {
+      $scope.usuario = response.data.rows[0];
+      console.log($scope.usuario);
+    });
+
+    usuario.usuario = sessionStorage.getItem("usuario");
+    usuario.follow = getParameterByName('username');
+
+    $http.post("http://localhost:1337/follow/getByUsuarioFollow", usuario).then(function(response) {
+      if(response.data.rowCount == 1){
+        $scope.following = true;
+      } else {
+        $scope.following = false;
+      }
+
+    });
+
   }
 
   $scope.updateUser = function(){
@@ -423,6 +429,36 @@ myApp.controller('profileController', ['$scope', '$http', '$window', 'authentica
    });
   }
 
+  $scope.follow = function(){
+    var usuario = {};
+
+    usuario.usuario = sessionStorage.getItem("usuario");
+    usuario.follow = getParameterByName('username');
+
+    $http.post("http://localhost:1337/follow/create", usuario).then(function(response) {
+      if(response.data.sucesso == true){
+        console.log(response.data.sucesso);
+        $scope.following = true;
+      }
+    });
+
+  }
+
+  $scope.unfollow = function(){
+    var usuario = {};
+
+    usuario.usuario = sessionStorage.getItem("usuario");
+    usuario.follow = getParameterByName('username');
+
+    $http.post("http://localhost:1337/follow/remove", usuario).then(function(response) {
+      if(response.data.sucesso == true){
+        console.log(response.data.sucesso);
+        $scope.following = false;
+      }
+    });
+
+  }
+
 
 
 }]);
@@ -433,7 +469,7 @@ myApp.controller('allUsersController', ['$scope', '$http', function($scope, $htt
   $scope.allusers = {};
 
   $scope.loadUsers = function(){
-    
+
     var usuario = {usuario: sessionStorage.getItem("usuario")};
 
     $http.post('http://localhost:1337/usuario/getAll', usuario).then(function(response) {
