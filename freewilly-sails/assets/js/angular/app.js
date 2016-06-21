@@ -11,11 +11,6 @@ myApp.controller('SpicyController', ['$scope', '$http', function($scope, $http) 
     $scope.spice = 'jalapeño';
   };
 
-
-  $http.get("http://localhost:1337/usuario/createUsuario").then(function(response) {
-    console.log(response.data.sucesso);
-  });
-
 }]);
 
 

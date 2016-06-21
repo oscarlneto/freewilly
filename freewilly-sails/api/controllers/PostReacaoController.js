@@ -14,6 +14,7 @@ module.exports = {
 		postReacao.usuario = PostReacao.setUndefined(request.param('usuario'));
 		postReacao.reacao = PostReacao.setUndefined(request.param('reacao'));
 		postReacao.compartilhou = Post.setUndefined(request.param('compartilhou'));
+		postReacao.donoPost = Post.setUndefined(request.param('donoPost'));
 		
 		PostReacaoService.insert(postReacao, function (result) {
 			response.json(result);
@@ -27,6 +28,7 @@ module.exports = {
 		postReacao.usuario = PostReacao.setUndefined(request.param('usuario'));
 		postReacao.reacao = PostReacao.setUndefined(request.param('reacao'));
 		postReacao.compartilhou = PostReacao.setUndefined(request.param('compartilhou'));
+		postReacao.donoPost = Post.setUndefined(request.param('donoPost'));
 
 		PostReacaoService.update(postReacao, function (result) {
 			response.json(result);

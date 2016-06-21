@@ -66,13 +66,11 @@ CREATE TABLE PostReacao (
 	idPost INTEGER NOT NULL,
 	usuario VARCHAR(10) NOT NULL,
 	reacao INTEGER DEFAULT 0,
-	donoPost VARCHAR(10),
+	donoPost VARCHAR(10) DEFAULT NULL,
 	compartilhou BOOLEAN DEFAULT FALSE,
-	donopost VARCHAR(10),
 	CONSTRAINT FKpost FOREIGN KEY (idPost) REFERENCES Post (idPost) ON DELETE CASCADE,
 	CONSTRAINT FKusuario FOREIGN KEY (usuario) REFERENCES Usuario (usuario) ON DELETE CASCADE,
 	CONSTRAINT FKdonoPost FOREIGN KEY (donoPost) REFERENCES Usuario (usuario) ON DELETE CASCADE,
 	CONSTRAINT PKpostReacao PRIMARY KEY (idPost, usuario),
-	CONSTRAINT CHreacao CHECK (reacao IN (0, 1, 2)),
-	CONSTRAINT FKdono FOREIGN KEY (donopost) REFERENCES Usuario (usuario) ON DELETE CASCADE
+	CONSTRAINT CHreacao CHECK (reacao IN (0, 1, 2))
 );

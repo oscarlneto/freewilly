@@ -2,9 +2,9 @@ module.exports = {
 
 	insert: function(request, response) {
 
-		var query = "INSERT INTO PostReacao (idPost, usuario, reacao, compartilhou) VALUES ("
+		var query = "INSERT INTO PostReacao (idPost, usuario, reacao, compartilhou, donoPost) VALUES ("
 						+request.idPost+", "+PostReacao.setMarks(request.usuario)+", "
-						+request.reacao+", "+request.compartilhou+");";
+						+request.reacao+", "+request.compartilhou+", "+PostReacao.setMarks(request.donoPost)+");";
 
 		PostReacao.query(query, function (error, result) {
 
@@ -21,7 +21,8 @@ module.exports = {
 
 	update: function(request, response) {
 
-		var query = "UPDATE PostReacao SET reacao = "+request.reacao+", compartilhou = "+request.compartilhou+" "
+		var query = "UPDATE PostReacao SET reacao = "+request.reacao+", compartilhou = "+request.compartilhou+", "
+						+"donoPost = "+PostReacao.setMarks(request.usuario)+" "
 						+"WHERE idPost = "+request.idPost+" AND usuario = "+PostReacao.setMarks(request.usuario)+";";
 
 		PostReacao.query(query, function (error, result) {

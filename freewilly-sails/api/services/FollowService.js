@@ -53,7 +53,7 @@ module.exports = {
 
 	selectByUsuario: function(request, response) {
 
-		var query = "SELECT Usuario.usuario, Usuario.nome, Usuario.aniversaio, Usuario.foto, Usuario.descricao "
+		var query = "SELECT Usuario.usuario, Usuario.nome, Usuario.aniversario, Usuario.foto, Usuario.descricao "
 						+"FROM Follow JOIN Usuario ON Follow.follow = Usuario.usuario "
 						+"WHERE Follow.usuario = "+Follow.setMarks(request.usuario)+";";
 
@@ -72,7 +72,7 @@ module.exports = {
 
 	selectByFollow: function(request, response) {
 
-		var query = "SELECT Usuario.usuario, Usuario.nome, Usuario.aniversaio, Usuario.foto, Usuario.descricao "
+		var query = "SELECT Usuario.usuario, Usuario.nome, Usuario.aniversario, Usuario.foto, Usuario.descricao "
 						+"FROM Follow JOIN Usuario ON Follow.usuario = Usuario.usuario "
 						+"WHERE Follow.follow = "+Follow.setMarks(request.follow)+";";
 

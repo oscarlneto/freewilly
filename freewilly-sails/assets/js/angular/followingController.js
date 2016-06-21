@@ -14,6 +14,4 @@ myApp.controller('followingController', ['$scope', '$http', function($scope, $ht
    });
 
   }
-
-
 }]);
