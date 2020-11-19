@@ -85,6 +85,10 @@ Use this to look for errors.
 
 `3- Postgresql user is ok?`
 
+# Azure DevOps
+
+Connect Azure DevOps Board with GitHub
+
 ## Contact us!
 
 Oscar C. Lima Neto  oscarneto@usp.br
